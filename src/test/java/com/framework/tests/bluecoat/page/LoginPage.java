@@ -11,8 +11,8 @@ import junit.framework.Assert;
 
 public class LoginPage extends SeleniumLibrary {
 	protected int timeout = 10;
-	protected String userId = "8631";
-	protected String password = "Itcinfotech9(";
+	String barImage = "barGraph.png";
+	String yellowPie = "pieyellow.png";
 
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
@@ -25,26 +25,29 @@ public class LoginPage extends SeleniumLibrary {
 		clearAndsendKeys(By.cssSelector(getValue("bluecoatloginpassword")), "Itcinfotech@123");
 		click(By.xpath(getValue("bluecoatsubmit")), timeout);
 		wait(20);
-		
-		wait(500);
+		clickBarGraph(barImage);
+		wait(10);
+		clickBarGraph(yellowPie);
+		wait(300);
 	}
 
-	 public boolean clickGraph(String path, int waitTimeInSeconds ){
+	 public boolean clickBarGraph(String imageName){
+		 log("Click image " + imageName);
 		 Screen s = new Screen();
 
-		 if(s.exists("")!=null){
+		 if(s.exists(imageName)!=null){
 			 try {
-				// s.type(path);
+				 s.click(new Pattern (imageName).targetOffset(0, 0));
 				 return true;
 			 } catch (Exception e) {
+				 System.out.println("Message " + e.getMessage());
 				 e.printStackTrace();
 			 }
-
-		 }
-		 else{
+		 } else{
+			 log("Image not found");
 		 }
 		 return false;
 
 	 }
-	 
+
 }
