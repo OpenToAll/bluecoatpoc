@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Smoke Test" verbose="1">
+	<test name="Elastica POC">
+		<groups>
+			<run>
+				<include name="POC1" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.elastica.test.GoogleDrivePOC" />
+		</classes>
+	</test>
+</suite>
