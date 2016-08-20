@@ -8,12 +8,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import com.framework.core.Global;
 import com.framework.core.SeleniumLibrary;
-import com.framework.tests.bluecoat.page.LoginPage;
+import com.framework.tests.bluecoat.page.BlueCoatLoginPage;
 import com.framework.tests.itconepoint.OnePointLibrary;
 
 public class BlueCoatLibrary extends SeleniumLibrary {
 	
-	protected LoginPage bluecoatLoginPage = null;
+	protected BlueCoatLoginPage bluecoatLoginPage = null;
 	
 	static final Logger logger = Logger.getLogger(OnePointLibrary.class);
 	int timeout = 20;
@@ -27,7 +27,7 @@ public class BlueCoatLibrary extends SeleniumLibrary {
 		 Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		 String browserName = cap.getBrowserName().toLowerCase();
 		 Global.TEST_SET.add(browserName + "@" + cap.getVersion().toString());
-		 bluecoatLoginPage = new LoginPage(driver);
+		 bluecoatLoginPage = new BlueCoatLoginPage(driver);
 	 }
 
 	 @AfterClass

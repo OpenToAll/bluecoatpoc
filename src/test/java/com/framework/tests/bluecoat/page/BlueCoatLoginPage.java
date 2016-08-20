@@ -9,12 +9,12 @@ import com.framework.core.SeleniumLibrary;
 
 import junit.framework.Assert;
 
-public class LoginPage extends SeleniumLibrary {
+public class BlueCoatLoginPage extends SeleniumLibrary {
 	protected int timeout = 10;
 	String barImage = "barGraph.png";
 	String yellowPie = "pieyellow.png";
 
-	public LoginPage(WebDriver driver) {
+	public BlueCoatLoginPage(WebDriver driver) {
 		this.driver = driver;
 	}
 	
@@ -25,12 +25,22 @@ public class LoginPage extends SeleniumLibrary {
 		clearAndsendKeys(By.cssSelector(getValue("bluecoatloginpassword")), "Itcinfotech@123");
 		click(By.xpath(getValue("bluecoatsubmit")), timeout);
 		wait(20);
+		
+	}
+
+	public String getTitle() throws Exception {
+		String title = driver.getTitle();
+		log("Title " + title);
+		return title;
+	}
+	
+	public void validateImage() throws InterruptedException{
 		clickBarGraph(barImage);
 		wait(10);
 		clickBarGraph(yellowPie);
 		wait(300);
 	}
-
+	
 	 public boolean clickBarGraph(String imageName){
 		 log("Click image " + imageName);
 		 Screen s = new Screen();
