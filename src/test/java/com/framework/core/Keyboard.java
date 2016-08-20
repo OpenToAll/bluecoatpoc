@@ -1,4 +1,4 @@
-package com.elastica.utils;
+package com.framework.core;
 
 import static java.awt.event.KeyEvent.VK_0;
 import static java.awt.event.KeyEvent.VK_1;
