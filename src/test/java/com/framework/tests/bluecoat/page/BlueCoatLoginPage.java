@@ -1,5 +1,7 @@
 package com.framework.tests.bluecoat.page;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.sikuli.script.FindFailed;
@@ -25,7 +27,22 @@ public class BlueCoatLoginPage extends SeleniumLibrary {
 		clearAndsendKeys(By.cssSelector(getValue("bluecoatloginpassword")), "Itcinfotech@123");
 		click(By.xpath(getValue("bluecoatsubmit")), timeout);
 		wait(20);
-		
+	}
+	
+	public void clickRiskSetting(String option) throws Exception {
+		click(By.xpath(getValue("bluecoatrisksetting")), timeout);
+		wait(2);
+		click(By.xpath(getValue("bluecoatinput")), timeout);
+		wait(2);
+		click(By.xpath(getValue("selecttype").replace("TITLE", option)), timeout);
+		wait(2);
+		click(By.xpath(getValue("bluecoatsettingsave")), timeout);
+		wait(10);
+	}
+	
+	public boolean isDisplay(String table) throws Exception {
+		log("Is Found " + getWebElement((By.xpath(getValue(table)))).isDisplayed());
+		return getWebElement((By.xpath(getValue(table)))).isDisplayed();
 	}
 
 	public String getTitle() throws Exception {
