@@ -26,7 +26,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
-
+import org.sikuli.script.ImagePath;
+import com.framework.core.*;
 import com.framework.library.HttpUtil;
 import com.framework.library.utils.MiscUtils;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -52,6 +53,9 @@ public class Library {
     protected int TIME_OUT = 20;
 	protected Properties objectDBProp;
 	protected InputStream inputStream;
+	
+	public static final String SIKULI_IMAGE=System.getProperty("user.dir")+File.separator+"src"+File.separator+"test"+File.separator+
+			"resources"+File.separator+"images"+File.separator+"windows"+File.separator;
     
 	public void assignBrowser() throws IOException {
 		if ("firefox".equals(Global.getBrowserName())) {
@@ -110,7 +114,7 @@ public class Library {
 		} else {
 			log.error("Could not find a suitable browser");
 		}
-		
+	//	ImagePath.add(.SIKULI_IMAGE);
 	}
 
 	
