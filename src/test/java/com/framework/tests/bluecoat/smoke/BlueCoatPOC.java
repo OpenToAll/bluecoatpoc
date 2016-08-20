@@ -21,6 +21,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		Assert.assertFalse(bluecoatLoginPage.isDisplay("bluecoatriskgroupchartnotdisplayed"), "Risk Chart Widget Is Displayed");
 		log("Enable Chart Only And Verify Chart Displayed");
 		bluecoatLoginPage.clickRiskSetting("Chart Only");
+		log("Verify Table Is Not Displayed");
 		Assert.assertFalse(bluecoatLoginPage.isDisplay("bluecoatriskgrouptable"), "Risk Table Widget Is Not Disabled");
 		log("Verify Graph is displayed");
 		Assert.assertTrue(bluecoatLoginPage.isDisplay("bluecoatriskgroupchartdisplayed"), "Risk Chart Widget Is Displayed");
