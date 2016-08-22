@@ -40,10 +40,35 @@ public class BlueCoatLoginPage extends SeleniumLibrary {
 		wait(10);
 	}
 	
+	public void clickReportCenter() throws Exception {
+		click(By.xpath(getValue("bluecoatReportCenterMenu")), timeout);
+		wait(2);
+		click(By.xpath(getValue("bluecoatRunSimpleReport")), timeout);
+		wait(2);
+		onMouseOver(By.xpath(getValue("bluecoatClickWhen")));
+		wait(2);
+		click(By.xpath(getValue("bluecoatClickYear")), timeout);
+		wait(10);
+	}
+	
+	public void clickPopUpDownload() throws Exception {
+		click(By.xpath(getValue("bluecoatDownload")), timeout);
+		wait(2);
+		click(By.cssSelector(getValue("bluecoatPopUpDownload")), timeout);
+		wait(2);
+	}
+	
 	public boolean isDisplay(String table) throws Exception {
 		log("Is Found " + getWebElement((By.xpath(getValue(table)))).isDisplayed());
 		return getWebElement((By.xpath(getValue(table)))).isDisplayed();
 	}
+	
+	public String getText(String Element) throws Exception {
+		String title = getText(By.xpath(getValue(Element)));
+		log("Title " + title);
+		return title;
+	}
+	
 
 	public String getTitle() throws Exception {
 		String title = driver.getTitle();

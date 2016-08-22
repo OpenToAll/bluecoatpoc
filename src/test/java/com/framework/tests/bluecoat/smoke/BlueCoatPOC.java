@@ -1,4 +1,5 @@
 package com.framework.tests.bluecoat.smoke;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.framework.tests.bluecoat.BlueCoatLibrary;
@@ -11,7 +12,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		Assert.assertTrue(bluecoatLoginPage.getTitle().contains("Blue Coat ThreatPulse"), "Title Not found");
 	}
 
-	@Test (description = "Widget Validation")
+	//@Test (description = "Widget Validation")
 	public void Test_02_Validate_Widget() throws Exception { 
 		log("Enable Grid Only And Verify Grid Displayed");
 		bluecoatLoginPage.clickRiskSetting("Grid Only");
@@ -31,5 +32,13 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		Assert.assertTrue(bluecoatLoginPage.isDisplay("bluecoatriskgrouptable"), "Risk Table Widget Is Not Enable");
 		Assert.assertTrue(bluecoatLoginPage.isDisplay("bluecoatriskgroupchartdisplayed"), "Risk Chart Widget Is Displayed");
 		
+	}
+	
+	@Test (description = "Report Validation")
+	public void Test_02_Testing_Report_PDF() throws Exception { 
+		log("Click on Report Center And Verify Grid Displayed");
+		bluecoatLoginPage.clickReportCenter();
+		Assert.assertEquals(bluecoatLoginPage.getText("bluecoatReportHeader"),"Year","Report Year is Not Displayed");
+		bluecoatLoginPage.clickPopUpDownload();
 	}
 }
