@@ -40,5 +40,8 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		bluecoatLoginPage.clickReportCenter();
 		Assert.assertEquals(bluecoatLoginPage.getText("bluecoatReportHeader"),"Year","Report Year is Not Displayed");
 		bluecoatLoginPage.clickPopUpDownload();
+		String result=bluecoatLoginPage.getTextFromPDF();
+		Assert.assertTrue(result.contains("Year"), "PDF File Not contains Year text");
+		
 	}
 }

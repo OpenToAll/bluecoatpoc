@@ -1,5 +1,6 @@
 package com.framework.tests.bluecoat.page;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.openqa.selenium.By;
@@ -7,6 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
+
+import com.asprise.util.pdf.PDFReader;
+import com.framework.core.Keyboard;
 import com.framework.core.SeleniumLibrary;
 
 import junit.framework.Assert;
@@ -55,7 +59,22 @@ public class BlueCoatLoginPage extends SeleniumLibrary {
 		click(By.xpath(getValue("bluecoatDownload")), timeout);
 		wait(2);
 		click(By.cssSelector(getValue("bluecoatPopUpDownload")), timeout);
-		wait(2);
+		wait(10);
+	}
+	
+	public String getTextFromPDF() throws Exception {
+	Keyboard awt = new Keyboard();
+	awt.type("\n");
+	wait(15);
+	PDFReader reader = new PDFReader(new File("/Users/laxman/Downloads/Year.PDF"));
+	reader.open(); // open the file. 
+	int pages = reader.getNumberOfPages();
+	String text = null;
+	for(int i=0; i < pages; i++) {
+	   text = reader.extractTextFromPage(i);
+	   System.out.println("Page " + i + ": " + text); 
+	}
+	return text; 
 	}
 	
 	public boolean isDisplay(String table) throws Exception {
