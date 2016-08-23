@@ -12,7 +12,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		Assert.assertTrue(bluecoatLoginPage.getTitle().contains("Blue Coat ThreatPulse"), "Title Not found");
 	}
 
-	//@Test (description = "Widget Validation")
+	@Test (description = "Widget Validation")
 	public void Test_02_Validate_Widget() throws Exception { 
 		log("Enable Grid Only And Verify Grid Displayed");
 		bluecoatLoginPage.clickRiskSetting("Grid Only");
