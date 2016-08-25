@@ -22,7 +22,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-//import com.framework.library.SikuliLibrary;
 import org.openqa.selenium.Alert;
 
 public class SeleniumLibrary extends Library {
@@ -30,7 +29,6 @@ public class SeleniumLibrary extends Library {
 	
 	
 	
-	//protected SikuliLibrary sikuli = null;
 	WebElement e = null;
 	public static enum commandEnum{click, isDisplayed, isElementPresent, isNotDisplayed, getText, sendKeys, submit, compareText, getAttr, moveToElementAndClick,select};
 	public static enum IframeEnum{defaultContent, other}
@@ -54,25 +52,11 @@ public class SeleniumLibrary extends Library {
 				LocatorFrom,"mousedown",xto,yto);
 	}
 	
-//	public void mouseClickUsingSikuliOnFlash(int offSetX, int offSetY) throws Exception{
-//		By byto = By.id("flashFrame");
-//		SikuliLibrary sik = new SikuliLibrary();
-//		WebElement elementLocation = driver.findElement(byto);
-//		int x = elementLocation.getLocation().x;
-//		int y = elementLocation.getLocation().y;
-//		x+=offSetX;
-//		y+=offSetY;
-//		Point p=new Point(x, y);
-//		log("Mouse click using Sikuli on Flash: Point "+x+","+y);
-//		sik.mouseClick(p);
-//	}
-	
 	public void goToURL(String url){
 		logWithScreenshot("Go to url [ "+url+ " ]");
 		driver.get(url);
 	}
 	
-	//click(By.name("grant_required_clicked"), 5);
 	public void click(By locator, int timeout) {
 		logWithScreenshot("Clicking on [" + locator.toString() + "]");
 		e=waitFindElement(locator, timeout);
