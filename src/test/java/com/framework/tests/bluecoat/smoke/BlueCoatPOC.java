@@ -24,22 +24,17 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	 */
 	@Test (description = "DashBoard Widget Validation")
 	public void Test_02_BlueCoat_DashBoard() throws Exception { 
-		log("*****Enable Grid Only And Verify Grid Displayed*****");
+		log("*****Enable Grid Only, Verify Grid Is Displayed, And Graph Is Not Displayed*****");
 		blueCoatDashboardPage.clickRiskSetting("Grid Only");
 		Assert.assertTrue(blueCoatDashboardPage.isDisplay("bluecoatriskgrouptable"), "Risk Table Widget Is Not Enable");
-		log("*****Verify Graph Is Not Displayed*****");
 		Assert.assertFalse(blueCoatDashboardPage.isDisplay("bluecoatriskgroupchartnotdisplayed"), "Risk Chart Widget Is Displayed");
 		
-		log("*****Enable Chart Only And Verify Chart Displayed*****");
+		log("*****Enable Chart Only, Verify Chart Is Displayed, And Grid Is Not Displayed*****");
 		blueCoatDashboardPage.clickRiskSetting("Chart Only");
-		
-		log("Verify Table Is Not Displayed");
-		Assert.assertFalse(blueCoatDashboardPage.isDisplay("bluecoatriskgrouptable"), "Risk Table Widget Is Not Disabled");
-		
-		log("Verify Graph is displayed");
 		Assert.assertTrue(blueCoatDashboardPage.isDisplay("bluecoatriskgroupchartdisplayed"), "Risk Chart Widget Is Displayed");
-		
-		log("*****Enable Grid and Chart, Verify Grid And Chart Displayed*****");
+		Assert.assertFalse(blueCoatDashboardPage.isDisplay("bluecoatriskgrouptable"), "Risk Table Widget Is Not Disabled");
+
+		log("*****Enable Grid and Chart, Verify Grid Is Displayed, And Chart Is Displayed*****");
 		blueCoatDashboardPage.clickRiskSetting("Both Grid and Chart");
 		Assert.assertTrue(blueCoatDashboardPage.isDisplay("bluecoatriskgrouptable"), "Risk Table Widget Is Not Enable");
 		Assert.assertTrue(blueCoatDashboardPage.isDisplay("bluecoatriskgroupchartdisplayed"), "Risk Chart Widget Is Displayed");

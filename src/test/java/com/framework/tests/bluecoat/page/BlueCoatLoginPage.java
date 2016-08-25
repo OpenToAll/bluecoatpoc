@@ -15,10 +15,12 @@ public class BlueCoatLoginPage extends BlueCoatCommon {
 	public void login() throws Exception{
 		goToURL("https://portal.qa3.bluecoatcloud.com/login.jsp");
 		wait(10);
+		log("Enter User Name And Password");
 		clearAndsendKeys(By.cssSelector(getValue("bluecoatloginuser")), getValue("user"));
 		clearAndsendKeys(By.cssSelector(getValue("bluecoatloginpassword")), getValue("password"));
 		click(By.xpath(getValue("bluecoatsubmit")), timeout);
 		wait(20);
+		log("Submit Successful");
 	}
 
 }

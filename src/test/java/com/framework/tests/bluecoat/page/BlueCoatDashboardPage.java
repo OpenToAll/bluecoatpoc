@@ -15,14 +15,17 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 	}
 	
 	public void clickRiskSetting(String option) throws Exception {
+		log("Selecting Option " + option + " From Risk Seting");
 		click(By.xpath(getValue("bluecoatrisksetting")), timeout);
 		wait(2);
+		log("Select From Option");
 		click(By.xpath(getValue("bluecoatinput")), timeout);
 		wait(2);
 		click(By.xpath(getValue("selecttype").replace("TITLE", option)), timeout);
 		wait(2);
 		click(By.xpath(getValue("bluecoatsettingsave")), timeout);
 		wait(10);
+		log("Successfully Selected Option From Risk Setting");
 	}
 	
 	public void validateImage() throws InterruptedException{
