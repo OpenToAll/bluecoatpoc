@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import com.framework.core.Global;
 import com.framework.core.SeleniumLibrary;
-import com.framework.tests.bluecoat.page.BlueCoatCommon;
 import com.framework.tests.bluecoat.page.BlueCoatDashboardPage;
 import com.framework.tests.bluecoat.page.BlueCoatLoginPage;
 import com.framework.tests.bluecoat.page.BlueCoatReportPage;
@@ -19,7 +18,6 @@ public class BlueCoatLibrary extends SeleniumLibrary {
 	protected BlueCoatLoginPage bluecoatLoginPage = null;
 	protected BlueCoatDashboardPage blueCoatDashboardPage = null;
 	protected BlueCoatReportPage blueCoatReportPage = null;
-	protected BlueCoatCommon blueCoatCommon = null;
 	
 	static final Logger logger = Logger.getLogger(OnePointLibrary.class);
 	int timeout = 20;
@@ -36,7 +34,6 @@ public class BlueCoatLibrary extends SeleniumLibrary {
 		 bluecoatLoginPage = new BlueCoatLoginPage(driver);
 		 blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
 		 blueCoatReportPage = new BlueCoatReportPage(driver);
-		 blueCoatCommon = new BlueCoatCommon();
 	 }
 
 	 @AfterClass

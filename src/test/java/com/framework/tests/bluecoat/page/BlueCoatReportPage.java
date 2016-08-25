@@ -37,7 +37,6 @@ public class BlueCoatReportPage extends BlueCoatCommon {
 	}
 	
 	public String getTextFromPDF() throws Exception {
-		wait(10);
 		String downloadedFile = getTheNewestFile(Global.DOWNLOAD_DIR, "PDF").toString();
 		String pdfText = "";
 	    PdfReader reader = new PdfReader(downloadedFile);

@@ -25,8 +25,6 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		wait(10);
 	}
 	
-
-	
 	public void validateImage() throws InterruptedException{
 		clickBarGraph(barImage);
 		wait(10);
