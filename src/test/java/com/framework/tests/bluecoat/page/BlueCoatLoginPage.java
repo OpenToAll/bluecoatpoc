@@ -26,7 +26,6 @@ public class BlueCoatLoginPage extends SeleniumLibrary {
 	
 	public void login() throws Exception{
 		goToURL("https://portal.qa3.bluecoatcloud.com/login.jsp");
-		wait(20);
 		clearAndsendKeys(By.cssSelector(getValue("bluecoatloginuser")), "Raghunandan.dixit@itcinfotech.com");
 		clearAndsendKeys(By.cssSelector(getValue("bluecoatloginpassword")), "Itcinfotech@123");
 		click(By.xpath(getValue("bluecoatsubmit")), timeout);

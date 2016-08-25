@@ -35,7 +35,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	}
 	
 	@Test (description = "Report Validation")
-	public void Test_02_Testing_Report_PDF() throws Exception { 
+	public void Test_03_Testing_Report_PDF() throws Exception { 
 		log("Click on Report Center And Verify Grid Displayed");
 		bluecoatLoginPage.clickReportCenter();
 		Assert.assertEquals(bluecoatLoginPage.getText("bluecoatReportHeader"),"Year","Report Year is Not Displayed");
