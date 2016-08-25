@@ -64,7 +64,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	 * @throws Exception
 	 */
 	@Test (description = "DashBoard Widget Validation")
-	public void Test_03_BlueCoat_DashBoard_Overview_Count() throws Exception { 
+	public void Test_04_BlueCoat_DashBoard_Overview_Count() throws Exception { 
 		log("*****Dashboard Overview Count*****");
 		String selectField = "Business Related";
 		
@@ -115,7 +115,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	 * @throws Exception
 	 */
 	@Test (description = "Report Validation")
-	public void Test_03_BlueCoat_Report() throws Exception { 
+	public void Test_05_BlueCoat_Report() throws Exception { 
 		log("*****Click On Report Center And Verify Grid Displayed*****");
 		blueCoatReportPage.clickReportCenter();
 		Assert.assertEquals(blueCoatReportPage.getText("bluecoatReportHeader"),"Year","Report Year is Not Displayed");
