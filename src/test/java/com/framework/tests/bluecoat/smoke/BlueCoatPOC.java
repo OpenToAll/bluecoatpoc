@@ -75,40 +75,49 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		
 		log("*****Client IP Count*****");
 		String count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Client IP");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " +  dashBoardValue + " Overview page  protocol Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " 
+				+  dashBoardValue + " Overview page  protocol Count " + count);
 		
 		log("*****Protocol Count*****");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Protocol");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " +  dashBoardValue + " Overview page  protocol Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " 
+				+  dashBoardValue + " Overview page  protocol Count " + count);
 
 		log("*****Verdict Count*****");
 		blueCoatDashboardPage.ScrollToElement("bluecoatoverviewpage", "Verdict");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Verdict");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " +  dashBoardValue + " Overview page  Verdict Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value "
+				+  dashBoardValue + " Overview page  Verdict Count " + count);
 
 		log("*****Location Count*****");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Location");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " +  dashBoardValue + " Overview page  Location Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " 
+				+  dashBoardValue + " Overview page  Location Count " + count);
 		
 		log("*****Site Count*****");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Site");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " +  dashBoardValue + " Overview page  Site Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value "
+				+  dashBoardValue + " Overview page  Site Count " + count);
 		
 		log("*****Web Application Count*****");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Web Application");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " +  dashBoardValue + " Overview page  Web Application Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value "
+				+  dashBoardValue + " Overview page  Web Application Count " + count);
 
 		log("*****Subnet Count*****");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Subnet");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " +  dashBoardValue + " Overview page  Subnet Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value "
+				+  dashBoardValue + " Overview page  Subnet Count " + count);
 
 		log("*****User Count*****");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "User");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " +  dashBoardValue + " Overview page  User Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " 
+				+  dashBoardValue + " Overview page  User Count " + count);
 
 		log("*****Web Application Action Count*****");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Web Application Action");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " +  dashBoardValue + " Overview page  Web Application Action Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " 
+				+  dashBoardValue + " Overview page  Web Application Action Count " + count);
 	}
 	
 	/**
