@@ -12,4 +12,14 @@ public class BlueCoatCommon extends SeleniumLibrary {
 		return value;
 	}
 
+	public boolean isDisplay(String table) throws Exception {
+		log("Is Found " + getWebElement((By.xpath(getValue(table)))).isDisplayed());
+		return getWebElement((By.xpath(getValue(table)))).isDisplayed();
+	}
+	
+	public String getTitle() throws Exception {
+		String title = driver.getTitle();
+		log("Title " + title);
+		return title;
+	}
 }

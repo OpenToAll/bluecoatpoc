@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
 
-import com.framework.core.SeleniumLibrary;
-
 public class BlueCoatDashboardPage extends BlueCoatCommon {
 	protected int timeout = 10;
 	String barImage = "barGraph.png";
@@ -27,11 +25,7 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		wait(10);
 	}
 	
-	public String getTitle() throws Exception {
-		String title = driver.getTitle();
-		log("Title " + title);
-		return title;
-	}
+
 	
 	public void validateImage() throws InterruptedException{
 		clickBarGraph(barImage);
