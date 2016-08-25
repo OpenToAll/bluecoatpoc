@@ -1,5 +1,4 @@
 package com.framework.tests.bluecoat.smoke;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.framework.tests.bluecoat.BlueCoatLibrary;
@@ -41,7 +40,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		Assert.assertEquals(bluecoatLoginPage.getText("bluecoatReportHeader"),"Year","Report Year is Not Displayed");
 		bluecoatLoginPage.clickPopUpDownload();
 		String result=bluecoatLoginPage.getTextFromPDF();
-		Assert.assertTrue(result.contains("Year"), "PDF File Not contains Year text");
+		Assert.assertTrue(result.contains("4,500"), "PDF File Not contains Year text");
 		
 	}
 }

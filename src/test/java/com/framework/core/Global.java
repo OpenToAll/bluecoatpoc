@@ -1,5 +1,6 @@
 package com.framework.core;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 import org.apache.log4j.Logger;
@@ -21,7 +22,8 @@ public class Global {
     public static final String USER_HOME = System.getProperty("user.home");
     public static final String USER_NAME = System.getProperty("user.name");
     public static final boolean MULTIPLE_BROWSER = false;
-    
+    public static final String PDF_FILE =  Global.USER_HOME +  File.separator+ "Downloads" +File.separator +  "Year.PDF";
+
     // Scheduler for xml 
 	public static final String SCHEDULER_FILE = "/Files/schedueler.xml";
 	public static final int SCHEDULER_EXPIRE_TIME_DELAY = 10;

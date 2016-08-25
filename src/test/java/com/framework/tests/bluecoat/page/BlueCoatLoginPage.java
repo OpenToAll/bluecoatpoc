@@ -1,19 +1,16 @@
 package com.framework.tests.bluecoat.page;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.sikuli.script.FindFailed;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
-
-import com.asprise.util.pdf.PDFReader;
+import com.framework.core.Global;
 import com.framework.core.Keyboard;
 import com.framework.core.SeleniumLibrary;
-
-import junit.framework.Assert;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.parser.PdfReaderContentParser;
+import com.itextpdf.text.pdf.parser.SimpleTextExtractionStrategy;
+import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
 
 public class BlueCoatLoginPage extends SeleniumLibrary {
 	protected int timeout = 10;
@@ -26,8 +23,8 @@ public class BlueCoatLoginPage extends SeleniumLibrary {
 	
 	public void login() throws Exception{
 		goToURL("https://portal.qa3.bluecoatcloud.com/login.jsp");
-		clearAndsendKeys(By.cssSelector(getValue("bluecoatloginuser")), "Raghunandan.dixit@itcinfotech.com");
-		clearAndsendKeys(By.cssSelector(getValue("bluecoatloginpassword")), "Itcinfotech@123");
+		clearAndsendKeys(By.cssSelector(getValue("bluecoatloginuser")), getValue("user"));
+		clearAndsendKeys(By.cssSelector(getValue("bluecoatloginpassword")), getValue("password"));
 		click(By.xpath(getValue("bluecoatsubmit")), timeout);
 		wait(20);
 	}
@@ -62,18 +59,20 @@ public class BlueCoatLoginPage extends SeleniumLibrary {
 	}
 	
 	public String getTextFromPDF() throws Exception {
-	Keyboard awt = new Keyboard();
-	awt.type("\n");
-	wait(15);
-	PDFReader reader = new PDFReader(new File("/Users/laxman/Downloads/Year.PDF"));
-	reader.open(); // open the file. 
-	int pages = reader.getNumberOfPages();
-	String text = null;
-	for(int i=0; i < pages; i++) {
-	   text = reader.extractTextFromPage(i);
-	   System.out.println("Page " + i + ": " + text); 
-	}
-	return text; 
+		Keyboard awt = new Keyboard();
+		awt.type("\n");
+		wait(15);
+		String pdfText = "";
+	    PdfReader reader = new PdfReader(Global.PDF_FILE);
+	    PdfReaderContentParser parser = new PdfReaderContentParser(reader);
+	    TextExtractionStrategy strategy;
+	    for (int i = 1; i <= reader.getNumberOfPages(); i++) {
+	        strategy = parser.processContent(i, new SimpleTextExtractionStrategy());
+	        pdfText += strategy.getResultantText();
+	    }
+	    reader.close();
+	    log("File Contains" + pdfText);
+		return pdfText;
 	}
 	
 	public boolean isDisplay(String table) throws Exception {
