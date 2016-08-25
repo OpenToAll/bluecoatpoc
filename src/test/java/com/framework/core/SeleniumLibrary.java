@@ -1,7 +1,6 @@
 package com.framework.core;
 
 import java.awt.AWTException;
-import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.File;

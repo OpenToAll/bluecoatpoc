@@ -1,4 +1,5 @@
 package com.framework.tests.bluecoat.smoke;
+import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.framework.tests.bluecoat.BlueCoatLibrary;
@@ -19,12 +20,27 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		Assert.assertTrue(bluecoatLoginPage.getTitle().contains("Blue Coat ThreatPulse"), "Title Not found");
 		log("*****Successful DashBoard Widget*****");
 	}
+	
+	/**
+	 * @throws Exception
+	 */
+	@Test (description = "DashBoard Widget Validation")
+	public void Test_02_BlueCoat_DashBoard_Widget_Validate() throws Exception { 
+		List<String> listOfWidgetTitle = blueCoatDashboardPage.getAllWidgetTitles();
+		Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Trend of Threats"), "Title Not found");
+		Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Social Media Applications"), "Title Not found");
+		Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Risk Groups"), "Title Not found");
+		Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Web Browsing per Site"), "Title Not found");
+		Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle,  "Web Browsing per Category"), "Title Not found");
+		Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Web Browsing per User"), "Title Not found");
+		Assert.assertTrue(listOfWidgetTitle.size() == 6, "All Title Not Found Count " +  listOfWidgetTitle.size());
+	}
 
 	/**
 	 * @throws Exception
 	 */
 	@Test (description = "DashBoard Widget Validation")
-	public void Test_02_BlueCoat_DashBoard_Widget_Enable() throws Exception { 
+	public void Test_03_BlueCoat_DashBoard_Widget_Enable() throws Exception { 
 		log("*****Enable Grid Only, Verify Grid Is Displayed, And Graph Is Not Displayed*****");
 		blueCoatDashboardPage.clickRiskSetting("Grid Only");
 		Assert.assertTrue(blueCoatDashboardPage.isDisplay("bluecoatriskgrouptable"), "Risk Table Widget Is Not Enable");
@@ -46,7 +62,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	 * @throws Exception
 	 */
 	@Test (description = "DashBoard Widget Validation")
-	public void Test_03_BlueCoat_DashBoard_Graph_Value() throws Exception { 
+	public void Test_04_BlueCoat_DashBoard_Graph_Value() throws Exception { 
 		log("*****Validate Security In Grid And Graph Tooltip Value Same*****");
 		
 		log("*****Validate Business Related Graph Count With Grid*****");
@@ -64,7 +80,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	 * @throws Exception
 	 */
 	@Test (description = "DashBoard Widget Validation")
-	public void Test_04_BlueCoat_DashBoard_Overview_Count() throws Exception { 
+	public void Test_05_BlueCoat_DashBoard_Overview_Count() throws Exception { 
 		log("*****Dashboard Overview Count*****");
 		String selectField = "Business Related";
 		
@@ -124,7 +140,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	 * @throws Exception
 	 */
 	@Test (description = "Report Validation")
-	public void Test_05_BlueCoat_Report() throws Exception { 
+	public void Test_06_BlueCoat_Report() throws Exception { 
 		log("*****Click On Report Center And Verify Grid Displayed*****");
 		blueCoatReportPage.clickReportCenter();
 		Assert.assertEquals(blueCoatReportPage.getText("bluecoatReportHeader"),"Year","Report Year is Not Displayed");

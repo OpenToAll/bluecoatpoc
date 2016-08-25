@@ -12,6 +12,9 @@ public class BlueCoatReportPage extends BlueCoatCommon {
 		this.driver = driver;
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void clickReportCenter() throws Exception {
 		log("Click Report Center Menu");
 		click(By.xpath(getValue("bluecoatReportCenterMenu")), timeout);
@@ -26,6 +29,9 @@ public class BlueCoatReportPage extends BlueCoatCommon {
 		wait(10);
 	}
 	
+	/**
+	 * @throws Exception
+	 */
 	public void clickPopUpDownload() throws Exception {
 		log("Click Download Button");
 		click(By.xpath(getValue("bluecoatDownload")), timeout);

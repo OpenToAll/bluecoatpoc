@@ -12,9 +12,7 @@ import java.util.Properties;
 
 import org.apache.http.HttpResponse;
 import org.apache.log4j.Logger;
-import org.testng.Assert;
 import org.testng.Reporter;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -24,16 +22,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.sikuli.script.ImagePath;
-import com.framework.core.*;
 import com.framework.library.HttpUtil;
 import com.framework.library.utils.MiscUtils;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-
-
 
 public class Library {
 	static final Logger log = Logger.getLogger(Library.class);
@@ -41,9 +33,6 @@ public class Library {
 	public static File path=new File(".");	
 	public WebDriver driver;
 	private final int ADMIN_CALL_RETRY_COUNT = 2;
-	private final int AUTH_TOKEN_RETRY_COUNT = 2;
-	private final int GET_FACEBOOK_LOGIN_URL_RETRY_COUNT = 2;
-	private final int TARGETING_CALL_RETRY_COUNT = 2;
 	static final int CONNECTION_TIMEOUT = 10 * 1000;
     static final int SO_TIMEOUT = 120 * 1000;
     protected String IMAGE_PATH;

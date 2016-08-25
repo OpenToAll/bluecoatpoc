@@ -12,6 +12,9 @@ public class BlueCoatLoginPage extends BlueCoatCommon {
 		this.driver = driver;
 	}
 	
+	/**
+	 * @throws Exception
+	 */
 	public void login() throws Exception{
 		goToURL("https://portal.qa3.bluecoatcloud.com/login.jsp");
 		wait(10);
