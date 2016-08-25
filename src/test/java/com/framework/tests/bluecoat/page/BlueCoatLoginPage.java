@@ -23,6 +23,7 @@ public class BlueCoatLoginPage extends SeleniumLibrary {
 	
 	public void login() throws Exception{
 		goToURL("https://portal.qa3.bluecoatcloud.com/login.jsp");
+		wait(10);
 		clearAndsendKeys(By.cssSelector(getValue("bluecoatloginuser")), getValue("user"));
 		clearAndsendKeys(By.cssSelector(getValue("bluecoatloginpassword")), getValue("password"));
 		click(By.xpath(getValue("bluecoatsubmit")), timeout);
@@ -59,11 +60,10 @@ public class BlueCoatLoginPage extends SeleniumLibrary {
 	}
 	
 	public String getTextFromPDF() throws Exception {
-		Keyboard awt = new Keyboard();
-		awt.type("\n");
-		wait(15);
+		wait(10);
+		String downloadedFile = getTheNewestFile(Global.DOWNLOAD_DIR, "PDF").toString();
 		String pdfText = "";
-	    PdfReader reader = new PdfReader(Global.PDF_FILE);
+	    PdfReader reader = new PdfReader(downloadedFile);
 	    PdfReaderContentParser parser = new PdfReaderContentParser(reader);
 	    TextExtractionStrategy strategy;
 	    for (int i = 1; i <= reader.getNumberOfPages(); i++) {
@@ -71,7 +71,7 @@ public class BlueCoatLoginPage extends SeleniumLibrary {
 	        pdfText += strategy.getResultantText();
 	    }
 	    reader.close();
-	    log("File Contains" + pdfText);
+	    log("File " + downloadedFile + " Contains \n" + pdfText);
 		return pdfText;
 	}
 	

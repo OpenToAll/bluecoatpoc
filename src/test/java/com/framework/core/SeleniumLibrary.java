@@ -4,9 +4,15 @@ import java.awt.AWTException;
 import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileFilter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.io.comparator.LastModifiedFileComparator;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -806,6 +812,23 @@ public class SeleniumLibrary extends Library {
         seleniumCommand(commandEnum.sendKeys,By.id("pass"), pwd);
         click(By.id("u_0_1"),1);
         wait(10);
+	}
+	
+	
+	/* Get the newest file for a specific extension */
+	public File getTheNewestFile(String filePath, String ext) {
+	    File theNewestFile = null;
+	    File dir = new File(filePath);
+	    FileFilter fileFilter = new WildcardFileFilter("*." + ext);
+	    File[] files = dir.listFiles(fileFilter);
+
+	    if (files.length > 0) {
+	        /** The newest file comes first **/
+	        Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
+	        theNewestFile = files[0];
+	    }
+	    log("New File " + theNewestFile);
+	    return theNewestFile;
 	}
 
 }
