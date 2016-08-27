@@ -1,4 +1,5 @@
 package com.framework.tests.bluecoat.smoke;
+import java.util.Arrays;
 import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -142,8 +143,8 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	@Test (description = "Report Validation")
 	public void Test_06_BlueCoat_Report() throws Exception { 
 		log("*****Click On Report Center And Verify Grid Displayed*****");
-		blueCoatReportPage.clickReportCenter();
-		Assert.assertEquals(blueCoatReportPage.getText("bluecoatReportHeader"),"Year","Report Year is Not Displayed");
+		blueCoatReportPage.clickReportCenter("bluecoatClickMonth");
+		Assert.assertEquals(blueCoatReportPage.getText("bluecoatReportHeader"),"Month","Report Year is Not Displayed");
 		
 		log("*****Get Value of Grid From The Table*****");
 		String getGridValue = blueCoatReportPage.getText("reportpagevalue");
@@ -151,9 +152,19 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		log("*****Download Year Data*****");
 		blueCoatReportPage.clickPopUpDownload();
 		
-		log("*****Get Downloaded PDF Data Read And Verify Grid Table Is Present In PDF*****");
+		
+		log("*****Get Downloaded PDF, Data Read And Verify Grid Table Data Is Present In PDF*****");
 		String result=blueCoatReportPage.getTextFromPDF();
+		
+		
 		Assert.assertTrue(result.contains(getGridValue), "PDF File Not contains Data "  + getGridValue);
+		log("*****Validate Month Is Present*****");
+		List<String>  listOfMonth = Arrays.asList("August 2016", "July 2016",
+				"June 2016", "May 2016", "April 2016", "March 2016", "February 2016",
+				"January 2016", "December 2015", "November 2015", "October 2015", "September 2015");
+		for(String month: listOfMonth) {
+			Assert.assertTrue(result.contains(month), "PDF File Not contains Data "  + month);
+		}
 		
 	}
 }

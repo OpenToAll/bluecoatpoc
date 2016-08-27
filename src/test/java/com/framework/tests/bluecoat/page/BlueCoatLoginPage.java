@@ -16,7 +16,7 @@ public class BlueCoatLoginPage extends BlueCoatCommon {
 	 * @throws Exception
 	 */
 	public void login() throws Exception{
-		goToURL("https://portal.qa3.bluecoatcloud.com/login.jsp");
+		goToURL(getValue("loginurl"));
 		wait(10);
 		log("Enter User Name And Password");
 		clearAndsendKeys(By.cssSelector(getValue("bluecoatloginuser")), getValue("user"));

@@ -15,7 +15,7 @@ public class BlueCoatReportPage extends BlueCoatCommon {
 	/**
 	 * @throws Exception
 	 */
-	public void clickReportCenter() throws Exception {
+	public void clickReportCenter(String value) throws Exception {
 		log("Click Report Center Menu");
 		click(By.xpath(getValue("bluecoatReportCenterMenu")), timeout);
 		wait(2);
@@ -25,7 +25,7 @@ public class BlueCoatReportPage extends BlueCoatCommon {
 		onMouseOver(By.xpath(getValue("bluecoatClickWhen")));
 		wait(2);
 		log("Click Year Submenu");
-		click(By.xpath(getValue("bluecoatClickYear")), timeout);
+		click(By.xpath(getValue(value)), timeout);
 		wait(10);
 	}
 	
