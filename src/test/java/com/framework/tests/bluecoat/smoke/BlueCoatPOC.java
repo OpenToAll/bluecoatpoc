@@ -140,8 +140,33 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	/**
 	 * @throws Exception
 	 */
-	@Test (description = "Report Validation")
-	public void Test_06_BlueCoat_Report() throws Exception { 
+	@Test (description = "Report Validation Year")
+	public void Test_06_BlueCoat_Report_Year() throws Exception { 
+		log("*****Click On Report Center And Verify Grid Displayed*****");
+		blueCoatReportPage.clickReportCenter("bluecoatClickYear");
+		Assert.assertEquals(blueCoatReportPage.getText("bluecoatReportHeader"),"Year","Report Year is Not Displayed");
+		
+		log("*****Get Value of Grid From The Table*****");
+		String getGridValue = blueCoatReportPage.getText("reportpagevalue");
+		
+		log("*****Download Year Data*****");
+		blueCoatReportPage.clickPopUpDownload();
+		
+		
+		log("*****Get Downloaded PDF, Data Read And Verify Grid Table Data Is Present In PDF*****");
+		String result=blueCoatReportPage.getTextFromPDF();
+		
+		
+		Assert.assertTrue(result.contains(getGridValue), "PDF File Not contains Data "  + getGridValue);
+		
+		
+	}
+	
+	/**
+	 * @throws Exception
+	 */
+	@Test (description = "Report Validation Month")
+	public void Test_06_BlueCoat_Report_Month() throws Exception { 
 		log("*****Click On Report Center And Verify Grid Displayed*****");
 		blueCoatReportPage.clickReportCenter("bluecoatClickMonth");
 		Assert.assertEquals(blueCoatReportPage.getText("bluecoatReportHeader"),"Month","Report Year is Not Displayed");
