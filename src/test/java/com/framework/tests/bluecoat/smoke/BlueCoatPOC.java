@@ -187,7 +187,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	public void Test_08_BlueCoat_Report_Month() throws Exception { 
 		log("*****Click On Report Center And Verify Grid Displayed*****");
 		blueCoatReportPage.clickReportCenter("bluecoatClickMonth");
-		Assert.assertEquals(blueCoatReportPage.getText("bluecoatReportHeader"),"Month","Report Year is Not Displayed");
+		Assert.assertEquals(blueCoatReportPage.getText("bluecoatReportHeader"),"Month","Report Month is Not Displayed");
 		
 		
 		List<String> listOfMonth = blueCoatDashboardPage.getGridValueByMonth();

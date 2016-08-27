@@ -23,8 +23,8 @@ public class BlueCoatReportPage extends BlueCoatCommon {
 		click(By.xpath(getValue("bluecoatRunSimpleReport")), timeout);
 		wait(2);
 		onMouseOver(By.xpath(getValue("bluecoatClickWhen")));
-		wait(2);
-		log("Click Year Submenu");
+		wait(5);
+		log("Click "+ value +" Submenu");
 		click(By.xpath(getValue(value)), timeout);
 		wait(10);
 	}
