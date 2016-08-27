@@ -234,4 +234,43 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		 }
 		 return false;
 	}
+	
+	/**
+	 * @return
+	 * @throws Exception
+	 */
+	public String getToolTipValueforMonthCircle() throws Exception {
+		String tooltipMonth = getText("reportchartCircletooltipMonth").replace("Month: ", "").trim();
+		String tooltipValue = getText("reportchartCircletooltipValue").replace("Requests: ", "").trim();
+		log("Tool Tip Value " + tooltipMonth + " " + tooltipValue);
+		return  tooltipMonth + " " + tooltipValue;
+	}
+	
+	/**
+	 * @param value
+	 * @return
+	 * @throws Exception
+	 */
+	public List<String> getGridValueByMonth() throws Exception {
+		log("Click Graph To Get Tooltip ");
+		List<String> itemsToAdd = new ArrayList<String>();
+		wait(10); 
+		for (int i = 1 ; i<= 12; i++) {
+			try {
+				String elementValue = getValue("reportpageMonthCircle").replaceAll("INDEX", i +"");
+				log("elementValue " + elementValue);
+				click(By.xpath(elementValue), 1);
+				wait(1);
+				String tooltipvalue = getToolTipValueforMonthCircle();
+				log("tooltipvalue " + tooltipvalue); 
+				itemsToAdd.add(tooltipvalue);
+			} catch(Exception e) {
+				log("Skipped " + i);
+			}
+		}
+		log("Value Not Present");
+		return itemsToAdd;
+	}
+	
+	
 }
