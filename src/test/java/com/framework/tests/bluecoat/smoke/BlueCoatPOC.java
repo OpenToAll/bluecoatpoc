@@ -189,7 +189,6 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		blueCoatReportPage.clickReportCenter("bluecoatClickMonth");
 		Assert.assertEquals(blueCoatReportPage.getText("bluecoatReportHeader"),"Month","Report Month is Not Displayed");
 		
-		
 		List<String> listOfMonth = blueCoatDashboardPage.getGridValueByMonth();
 		
 		log("*****Download Month Data*****");
@@ -198,9 +197,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		log("*****Get Downloaded PDF, Data Read And Verify Grid Table Data Is Present In PDF*****");
 		String result=blueCoatReportPage.getTextFromPDF();
 	
-
 		log("*****Validate Month Is Present*****");
-
 		for(String month: listOfMonth) {
 			Assert.assertTrue(result.contains(month), "PDF File Not contains Data "  + month);
 		}
