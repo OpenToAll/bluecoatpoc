@@ -10,6 +10,8 @@ import com.framework.tests.bluecoat.BlueCoatLibrary;
  *
  */
 public class BlueCoatPOC extends BlueCoatLibrary {
+	String dashBoardValueBusinessRelated;
+	String selectField = "Business Related";
 	
 	/**
 	 * @throws Exception
@@ -32,7 +34,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Social Media Applications"), "Title Not found");
 		Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Risk Groups"), "Title Not found");
 		Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Web Browsing per Site"), "Title Not found");
-		Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle,  "Web Browsing per Category"), "Title Not found");
+		//Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle,  "Web Browsing per Category"), "Title Not found");
 		Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Web Browsing per User"), "Title Not found");
 		Assert.assertTrue(listOfWidgetTitle.size() == 6, "All Title Not Found Count " +  listOfWidgetTitle.size());
 	}
@@ -77,71 +79,87 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		log("*****Successful DashBoard_Graph_Value*****");
 	}
 	
+	@Test (description = "DashBoard Widget Validation")
+	public void Test_05_BlueCoat_DashBoard_OverviewDayCounts() throws Exception { 
+		log("*****Dashboard Overview Count*****");
+		
+		log("*****Get Graph Value And Validate With Grid Value*****");
+		dashBoardValueBusinessRelated = blueCoatDashboardPage.getValueInGrid(selectField);
+		blueCoatDashboardPage.clickLinkInGrid(selectField);
+	
+		blueCoatDashboardPage.clickOverviewSetting("Both Grid and Chart", "Day");
+		blueCoatDashboardPage.clickDayGraphAndGetValue();
+		blueCoatDashboardPage.getDayGRidValue();
+		Assert.assertTrue(blueCoatDashboardPage.verifyGridAndGraph(), "Grid And Graph Value Is Not Same");
+		log("*****Successful Dashboard Overview Count*****");
+	}
+	
 	/**
 	 * @throws Exception
 	 */
 	@Test (description = "DashBoard Widget Validation")
-	public void Test_05_BlueCoat_DashBoard_Overview_Count() throws Exception { 
+	public void Test_06_BlueCoat_DashBoard_Overview_Count() throws Exception { 
 		log("*****Dashboard Overview Count*****");
-		String selectField = "Business Related";
-		
-		log("*****Get " + selectField + " Count From Dashboard And Validate Same Count Present In Overview Page*****");
-		String dashBoardValue = blueCoatDashboardPage.getValueInGrid(selectField);
-		blueCoatDashboardPage.clickLinkInGrid(selectField);
-		
-		
+
 		log("*****Client IP Count*****");
 		String count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Client IP");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " 
-				+  dashBoardValue + " Overview page  protocol Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValueBusinessRelated),   selectField + "Dashboard Value " 
+				+  dashBoardValueBusinessRelated + " Overview page  protocol Count " + count);
 		
 		log("*****Protocol Count*****");
+		blueCoatDashboardPage.ScrollToElement("bluecoatoverviewpage", "Protocol");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Protocol");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " 
-				+  dashBoardValue + " Overview page  protocol Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValueBusinessRelated),   selectField + "Dashboard Value " 
+				+  dashBoardValueBusinessRelated + " Overview page  protocol Count " + count);
 
 		log("*****Verdict Count*****");
 		blueCoatDashboardPage.ScrollToElement("bluecoatoverviewpage", "Verdict");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Verdict");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value "
-				+  dashBoardValue + " Overview page  Verdict Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValueBusinessRelated),   selectField + "Dashboard Value "
+				+  dashBoardValueBusinessRelated + " Overview page  Verdict Count " + count);
 
 		log("*****Location Count*****");
+		blueCoatDashboardPage.ScrollToElement("bluecoatoverviewpage", "Location");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Location");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " 
-				+  dashBoardValue + " Overview page  Location Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValueBusinessRelated),   selectField + "Dashboard Value " 
+				+  dashBoardValueBusinessRelated + " Overview page  Location Count " + count);
 		
 		log("*****Site Count*****");
+		blueCoatDashboardPage.ScrollToElement("bluecoatoverviewpage", "Site");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Site");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value "
-				+  dashBoardValue + " Overview page  Site Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValueBusinessRelated),   selectField + "Dashboard Value "
+				+  dashBoardValueBusinessRelated + " Overview page  Site Count " + count);
 		
 		log("*****Web Application Count*****");
+		blueCoatDashboardPage.ScrollToElement("bluecoatoverviewpage", "Web Application");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Web Application");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value "
-				+  dashBoardValue + " Overview page  Web Application Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValueBusinessRelated),   selectField + "Dashboard Value "
+				+  dashBoardValueBusinessRelated + " Overview page  Web Application Count " + count);
 
 		log("*****Subnet Count*****");
+		blueCoatDashboardPage.ScrollToElement("bluecoatoverviewpage", "Subnet");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Subnet");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value "
-				+  dashBoardValue + " Overview page  Subnet Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValueBusinessRelated),   selectField + "Dashboard Value "
+				+  dashBoardValueBusinessRelated + " Overview page  Subnet Count " + count);
 
 		log("*****User Count*****");
+		blueCoatDashboardPage.ScrollToElement("bluecoatoverviewpage", "User");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "User");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " 
-				+  dashBoardValue + " Overview page  User Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValueBusinessRelated),   selectField + "Dashboard Value " 
+				+  dashBoardValueBusinessRelated + " Overview page  User Count " + count);
 
 		log("*****Web Application Action Count*****");
+		blueCoatDashboardPage.ScrollToElement("bluecoatoverviewpage", "Web Application Action");
 		count = blueCoatDashboardPage.getText("bluecoatoverviewpage", "Web Application Action");
-		Assert.assertTrue(count.equals(dashBoardValue),   selectField + "Dashboard Value " 
-				+  dashBoardValue + " Overview page  Web Application Action Count " + count);
+		Assert.assertTrue(count.equals(dashBoardValueBusinessRelated),   selectField + "Dashboard Value " 
+				+  dashBoardValueBusinessRelated + " Overview page  Web Application Action Count " + count);
 	}
 	
 	/**
 	 * @throws Exception
 	 */
 	@Test (description = "Report Validation Year")
-	public void Test_06_BlueCoat_Report_Year() throws Exception { 
+	public void Test_07_BlueCoat_Report_Year() throws Exception { 
 		log("*****Click On Report Center And Verify Grid Displayed*****");
 		blueCoatReportPage.clickReportCenter("bluecoatClickYear");
 		Assert.assertEquals(blueCoatReportPage.getText("bluecoatReportHeader"),"Year","Report Year is Not Displayed");
@@ -166,7 +184,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	 * @throws Exception
 	 */
 	@Test (description = "Report Validation Month")
-	public void Test_06_BlueCoat_Report_Month() throws Exception { 
+	public void Test_08_BlueCoat_Report_Month() throws Exception { 
 		log("*****Click On Report Center And Verify Grid Displayed*****");
 		blueCoatReportPage.clickReportCenter("bluecoatClickMonth");
 		Assert.assertEquals(blueCoatReportPage.getText("bluecoatReportHeader"),"Month","Report Year is Not Displayed");

@@ -38,6 +38,15 @@ public class BlueCoatCommon extends SeleniumLibrary {
 		return value;
 	}
 	
+	public String getText(String data, String row, String column) throws Exception {
+		String element = getValue(data).replaceAll("ROW", row).replace("COLUMN", column);
+		log("element" + element);
+		String value = getText(By.xpath(element));
+		log("Value " + value);
+		return value;
+	}
+	
+	
 	/**
 	 * @param table
 	 * @return
