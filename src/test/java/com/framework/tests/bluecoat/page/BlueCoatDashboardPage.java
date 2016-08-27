@@ -268,7 +268,7 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 				log("Skipped " + i);
 			}
 		}
-		log("Value Not Present");
+		log("tooltipvalue :: " + itemsToAdd);
 		return itemsToAdd;
 	}
 	
