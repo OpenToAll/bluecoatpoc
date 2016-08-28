@@ -28,7 +28,7 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 	
 	
 	
-	public void goToDashboar() throws Exception {
+	public void goToDashboard() throws Exception {
 		goToURL(getValue("dashboardurl"));
 		wait(10);
 	}
@@ -72,12 +72,13 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		String requestStrTooltipValue, dayTooltipDay;
 		List<WebElement> dayGraphPoints = getWebElements((By.xpath(getValue("bluecoatoverviewdaygraphpoint"))));
 		for (WebElement dayGrapnPoint : dayGraphPoints){
+			onMouseOver(dayGrapnPoint);
 			dayGrapnPoint.click();
-			wait(2);
 			requestStrTooltipValue = getText("bluecoattooltiprequest").replaceAll("Requests: ", "").trim();
 			dayTooltipDay = getText("bluecoattooltipday").replaceAll("Day: ", "").trim();
 			dayGraphDateAndValue.add( dayTooltipDay +"@" + requestStrTooltipValue);
 			log("***** REquestSTr " + requestStrTooltipValue + " Day value " +  dayTooltipDay + "****");
+			wait(2);
 	    } 
 		log("Value Of ToolTip " + Arrays.toString(dayGraphDateAndValue.toArray()));
 	}
@@ -149,7 +150,7 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 	}
 	
 	public boolean verifyDayGridAndGraph() throws Exception  {
-		log("Value Of Grid " + Arrays.toString(dayGridDateAndValue.toArray())
+		log("Value Of Day Grid " + Arrays.toString(dayGridDateAndValue.toArray())
 			+ " Value of Graph " + dayGraphDateAndValue);
 		return CollectionUtils.isEqualCollection(dayGridDateAndValue, dayGraphDateAndValue);
 	}

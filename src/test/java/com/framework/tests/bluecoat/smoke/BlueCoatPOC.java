@@ -32,7 +32,6 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		blueCoatDashboardPage.getGridValueOfWebBrowserSite();
 		blueCoatDashboardPage.clickWebBrowsingSiteFullReport();
 		blueCoatDashboardPage.clickFullReportWebBrowserSitePoints();
-		blueCoatDashboardPage.goToDashboar();
 		Assert.assertTrue(blueCoatDashboardPage.verifyGridAndGraphOfWebBrowserSite(), "Web Browse Site Grid And Graph Value Is Not Same");
 		log("*****Successful Dashboard Overview Count*****");
 	}
@@ -42,6 +41,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	 */
 	@Test (description = "DashBoard Widget Validation")
 	public void Test_03_BlueCoat_DashBoard_Widget_Validate() throws Exception { 
+		blueCoatDashboardPage.goToDashboard();
 		List<String> listOfWidgetTitle = blueCoatDashboardPage.getAllWidgetTitles();
 		Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Trend of Threats"), "Title Not found");
 		Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Social Media Applications"), "Title Not found");
@@ -58,7 +58,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	@Test (description = "DashBoard Widget Validation")
 	public void Test_04_BlueCoat_DashBoard_Widget_Enable() throws Exception { 
 		log("*****Enable Grid Only, Verify Grid Is Displayed, And Graph Is Not Displayed*****");
-		blueCoatDashboardPage.goToDashboar();
+		blueCoatDashboardPage.goToDashboard();
 		blueCoatDashboardPage.clickRiskSetting("Grid Only");
 		Assert.assertTrue(blueCoatDashboardPage.isDisplay("bluecoatriskgrouptable"), "Risk Table Widget Is Not Enable");
 		Assert.assertFalse(blueCoatDashboardPage.isDisplay("bluecoatriskgroupchartnotdisplayed"), "Risk Chart Widget Is Displayed");
@@ -96,7 +96,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	@Test (description = "DashBoard Widget Validation")
 	public void Test_06_BlueCoat_DashBoard_OverviewDayCounts() throws Exception { 
 		log("*****Dashboard Overview Count*****");
-		
+		blueCoatDashboardPage.goToDashboard();
 		log("*****Get Graph Value And Validate With Grid Value*****");
 		dashBoardValueBusinessRelated = blueCoatDashboardPage.getValueInGrid(selectField);
 		blueCoatDashboardPage.clickLinkInGrid(selectField);
@@ -175,6 +175,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	@Test (description = "Report Validation Year")
 	public void Test_08_BlueCoat_Report_Year() throws Exception { 
 		log("*****Click On Report Center And Verify Grid Displayed*****");
+		blueCoatDashboardPage.goToDashboard();
 		blueCoatReportPage.clickReportCenter("bluecoatClickYear");
 		Assert.assertEquals(blueCoatReportPage.getText("bluecoatReportHeader"),"Year","Report Year is Not Displayed");
 		
@@ -195,6 +196,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	@Test (description = "Report Validation Month")
 	public void Test_09_BlueCoat_Report_Month() throws Exception { 
 		log("*****Click On Report Center And Verify Grid Displayed*****");
+		blueCoatDashboardPage.goToDashboard();
 		blueCoatReportPage.clickReportCenter("bluecoatClickMonth");
 		Assert.assertEquals(blueCoatReportPage.getText("bluecoatReportHeader"),"Month","Report Month is Not Displayed");
 		

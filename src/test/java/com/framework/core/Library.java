@@ -51,40 +51,7 @@ public class Library {
 			log.debug("Starting Firefox driver");
 			FirefoxProfile profile = new FirefoxProfile();
 			profile.setPreference("capability.policy.default.Window.frameElement", "allAccess");
-			try {
-				if(!MiscUtils.empty(System.getProperty("plugin.firebug"))) {
-					log.debug("Adding Firebug (" + System.getProperty("plugin.firebug") + ")to Firefox");
-					profile.addExtension(new File(".\\libs\\firebug-1.9.0.xpi"));
-					profile.setPreference("extensions.firebug.currentVersion", "1.9.0"); 
-				}
-				if(!MiscUtils.empty(System.getProperty("plugin.firepath"))) {
-					log.debug("Adding Firepath (" + System.getProperty("plugin.firepath") + ")to Firefox");
-					profile.addExtension(new File(".\\libs\\firepath.xpi"));
-				}
-			} catch (Exception ex) {
-				log.error("Could not find the firefox extensions, launching Firefox without the extensions", ex);
-			}
-			profile.setAssumeUntrustedCertificateIssuer(false);
-			profile.setEnableNativeEvents(true);
-			profile.setPreference("browser.download.folderList", 2);				
-			profile.setPreference("browser.download.manager.showWhenStarting", false);
-			profile.setPreference("browser.download.manager.focusWhenStarting", false);
-			profile.setPreference("browser.download.useDownloadDir", true);
-			profile.setPreference("browser.helperApps.alwaysAsk.force", false);
-			profile.setPreference("browser.download.manager.alertOnEXEOpen", false);
-			profile.setPreference("browser.download.manager.closeWhenDone", true);
-			profile.setPreference("browser.download.manager.showAlertOnComplete", false);
-			profile.setPreference("browser.download.manager.useWindow", false);
-			profile.setPreference("plugin.disable_full_page_plugin_for_types", "application/pdf");
-			profile.setPreference("services.sync.prefs.sync.browser.download.manager.showWhenStarting", false);
-			profile.setPreference("pdfjs.disabled", true);
-			profile.setPreference("browser.helperApps.neverAsk.saveToDisk",
-					"text/plain,application/zip,application/octet-stream,text/xml,application/pdf,application/vnd.ms-powerpoint,application/octet-stream,application/msword,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.presentationml.slide,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12,application/vnd.ms-word.document.macroEnabled.12,application/vnd.ms-word.template.macroEnabled.12,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.ms-excel.sheet.macroEnabled.12,application/vnd.ms-excel.template.macroEnabled.12,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.ms-powerpoint.addin.macroEnabled.12,application/vnd.ms-powerpoint.presentation.macroEnabled.12,application/vnd.ms-powerpoint.template.macroEnabled.12,application/vnd.ms-powerpoint.slideshow.macroEnabled.12");
-			profile.setPreference("security.mixed_content.block_active_content", false);
-			profile.setPreference("security.mixed_content.block_display_content", true);
-			profile.setPreference("capability.policy.default.Window.QueryInterface", "allAccess");
-			profile.setPreference("capability.policy.default.Window.frameElement.get", "allAccess");
-			profile.setPreference("xpinstall.signatures.required", false);
+			log("Save Download Profile Setting");
 			profile.setPreference("browser.download.folderList",2);
 			profile.setPreference("browser.download.manager.showWhenStarting",false);
 			profile.setPreference("browser.download.dir", Global.DOWNLOAD_DIR);
