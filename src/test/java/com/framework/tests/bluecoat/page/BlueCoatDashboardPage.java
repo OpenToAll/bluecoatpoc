@@ -128,8 +128,8 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 	}
 	
 	public boolean verifyGridAndGraphOfWebBrowserSite() throws Exception  {
-		log("Value Of Grid " + Arrays.toString(webBarGrideSiteAndValue.toArray())
-			+ " Value of Graph " + webBarGraphSiteAndValue  );
+		log("Value Of Web Browser Grid " + Arrays.toString(webBarGrideSiteAndValue.toArray())
+			+ " Value of  Web Browser Graph " + webBarGraphSiteAndValue  );
 		return webBarGrideSiteAndValue.containsAll(webBarGraphSiteAndValue);
 	}
 	

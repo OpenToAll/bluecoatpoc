@@ -27,6 +27,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	@Test (description = "DashBoard Widget Validation")
 	public void Test_02_BlueCoat_DashBoard_WebSite_Full_Report() throws Exception { 
 		log("*****Get Grid Value Of Web Browser Site And Verify Same In Full Report*****");
+		blueCoatDashboardPage.goToDashboard();
 		blueCoatDashboardPage.ScrollToElement("bluecoatwebbrowsingfullreportlink");
 		blueCoatDashboardPage.getGridValueOfWebBrowserSite();
 		blueCoatDashboardPage.clickWebBrowsingSiteFullReport();
