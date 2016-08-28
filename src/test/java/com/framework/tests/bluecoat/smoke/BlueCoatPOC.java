@@ -1,5 +1,4 @@
 package com.framework.tests.bluecoat.smoke;
-import java.util.Arrays;
 import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;

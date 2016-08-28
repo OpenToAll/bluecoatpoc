@@ -26,12 +26,11 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		this.driver = driver;
 	}
 	
-	
-	
 	public void goToDashboard() throws Exception {
 		goToURL(getValue("dashboardurl"));
 		wait(10);
 	}
+	
 	/**
 	 * @param option
 	 * @throws Exception
