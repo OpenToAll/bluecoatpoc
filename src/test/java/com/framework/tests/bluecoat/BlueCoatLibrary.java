@@ -11,15 +11,13 @@ import com.framework.core.SeleniumLibrary;
 import com.framework.tests.bluecoat.page.BlueCoatDashboardPage;
 import com.framework.tests.bluecoat.page.BlueCoatLoginPage;
 import com.framework.tests.bluecoat.page.BlueCoatReportPage;
-import com.framework.tests.itconepoint.OnePointLibrary;
+
 
 public class BlueCoatLibrary extends SeleniumLibrary {
 	
 	protected BlueCoatLoginPage bluecoatLoginPage = null;
 	protected BlueCoatDashboardPage blueCoatDashboardPage = null;
 	protected BlueCoatReportPage blueCoatReportPage = null;
-	
-	static final Logger logger = Logger.getLogger(OnePointLibrary.class);
 	int timeout = 20;
 	
 	@Parameters("browser")
