@@ -24,6 +24,19 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		log("*****Successful DashBoard Widget*****");
 	}
 	
+	
+	@Test (description = "DashBoard Widget Validation")
+	public void Test_02_BlueCoat_DashBoard_WebSite_Full_Report() throws Exception { 
+		log("*****Get Grid Value Of Web Browser Site And Verify Same In Full Report*****");
+		blueCoatDashboardPage.ScrollToElement("bluecoatwebbrowsingfullreportlink");
+		blueCoatDashboardPage.getGridValueOfWebBrowserSite();
+		blueCoatDashboardPage.clickWebBrowsingSiteFullReport();
+		blueCoatDashboardPage.clickFullReportWebBrowserSitePoints();
+		blueCoatDashboardPage.goToDashboar();
+		Assert.assertTrue(blueCoatDashboardPage.verifyGridAndGraphOfWebBrowserSite(), "Web Browse Site Grid And Graph Value Is Not Same");
+		log("*****Successful Dashboard Overview Count*****");
+	}
+	
 	/**
 	 * @throws Exception
 	 */
@@ -64,7 +77,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	/**
 	 * @throws Exception
 	 */
-	@Test (description = "DashBoard Widget Validation")
+//	@Test (description = "DashBoard Widget Validation")
 	public void Test_04_BlueCoat_DashBoard_Graph_Value() throws Exception { 
 		log("*****Validate Security In Grid And Graph Tooltip Value Same*****");
 		
@@ -90,7 +103,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		blueCoatDashboardPage.clickOverviewSetting("Both Grid and Chart", "Day");
 		blueCoatDashboardPage.clickDayGraphAndGetValue();
 		blueCoatDashboardPage.getDayGRidValue();
-		Assert.assertTrue(blueCoatDashboardPage.verifyGridAndGraph(), "Grid And Graph Value Is Not Same");
+		Assert.assertTrue(blueCoatDashboardPage.verifyDayGridAndGraph(), "Day Grid And Graph Value Is Not Same");
 		log("*****Successful Dashboard Overview Count*****");
 	}
 	

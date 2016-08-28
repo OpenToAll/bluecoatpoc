@@ -19,11 +19,18 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 	String yellowPie = "pieyellow.png";
 	List<String> dayGraphDateAndValue;
 	List<String> dayGridDateAndValue;
+	List<String> webBarGraphSiteAndValue;
+	List<String> webBarGrideSiteAndValue;
 	
 	public BlueCoatDashboardPage(WebDriver driver) {
 		this.driver = driver;
 	}
 	
+	
+	
+	public void goToDashboar() throws Exception {
+		goToURL(getValue("dashboardurl"));
+	}
 	/**
 	 * @param option
 	 * @throws Exception
@@ -65,7 +72,7 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		List<WebElement> dayGraphPoints = getWebElements((By.xpath(getValue("bluecoatoverviewdaygraphpoint"))));
 		for (WebElement dayGrapnPoint : dayGraphPoints){
 			dayGrapnPoint.click();
-			wait(1);
+			wait(2);
 			requestStrTooltipValue = getText("bluecoattooltiprequest").replaceAll("Requests: ", "").trim();
 			dayTooltipDay = getText("bluecoattooltipday").replaceAll("Day: ", "").trim();
 			dayGraphDateAndValue.add( dayTooltipDay +"@" + requestStrTooltipValue);
@@ -73,6 +80,52 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 	    } 
 		log("Value Of ToolTip " + Arrays.toString(dayGraphDateAndValue.toArray()));
 	}
+	
+	public void clickWebBrowsingSiteFullReport() throws Exception {
+		log("Click Day Graph And Value"); 
+		click(By.xpath(getValue("bluecoatwebbrowsingfullreportlink")), timeout);
+		wait(20);
+	}
+	
+	public void getGridValueOfWebBrowserSite() throws Exception {
+		log("Click Day Graph And Value"); 
+		webBarGrideSiteAndValue = new ArrayList<String>();
+		 int count = getWebElements((By.xpath(getValue("bluecoatwebbrowsingsitegridcount")))).size();
+		for (int i = 1; i <= count; i++) {
+			String siteColumn= getText("bluecoatwebbrowsingsitegridvalue", i+"", "1");
+			String viewCountColumn = getText("bluecoatwebbrowsingsitegridvalue", i+"", "2");
+			webBarGrideSiteAndValue.add( siteColumn +"@" + viewCountColumn);
+			log("Day Column :" + siteColumn + "Value Column " + viewCountColumn);
+		}
+		log("Value Of Grid " + Arrays.toString(webBarGrideSiteAndValue.toArray()));
+		
+	}
+
+	public void clickFullReportWebBrowserSitePoints() throws Exception {
+		log("Click Day Graph And Value"); 
+		wait(10);
+		webBarGraphSiteAndValue = new ArrayList<String>();
+		String site, viewPageCount;
+		List<WebElement> webSiteGraphPoints = getWebElements((By.xpath(getValue("bluecoatwebbrowsingfullreportgraph"))));
+		for (WebElement webGrapnPoint : webSiteGraphPoints){
+			ScrollToElement(webGrapnPoint);
+			onMouseOver(webGrapnPoint);
+		//	click(By.xpath(webGrapnPoint), 1);
+			wait(2);
+			site = getText("bluecoatwebbrowsingfulltooltipsite").replaceAll("Site: ", "").trim();
+			viewPageCount = getText("bluecoatwebbrowsingfulltooltipviewcount").replaceAll("Page Views:  ", "").trim();
+			webBarGraphSiteAndValue.add( site +"@" + viewPageCount);
+			log("***** Site " + site + " Page Count" +  viewPageCount + "****");
+	    } 
+		log("Value Of ToolTip " + Arrays.toString(webBarGraphSiteAndValue.toArray()));
+	}
+	
+	public boolean verifyGridAndGraphOfWebBrowserSite() throws Exception  {
+		log("Value Of Grid " + Arrays.toString(webBarGrideSiteAndValue.toArray())
+			+ " Value of Graph " + webBarGraphSiteAndValue  );
+		return CollectionUtils.isEqualCollection(webBarGraphSiteAndValue, webBarGrideSiteAndValue);
+	}
+	
 	
 	public void getDayGRidValue() throws Exception {
 		log("Get Grid Value "); 
@@ -88,7 +141,7 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		log("Value Of Grid " + Arrays.toString(dayGridDateAndValue.toArray()));
 	}
 	
-	public boolean verifyGridAndGraph() throws Exception  {
+	public boolean verifyDayGridAndGraph() throws Exception  {
 		log("Value Of Grid " + Arrays.toString(dayGridDateAndValue.toArray())
 			+ " Value of Graph " + dayGraphDateAndValue);
 		return CollectionUtils.isEqualCollection(dayGridDateAndValue, dayGraphDateAndValue);

@@ -88,6 +88,17 @@ public class BlueCoatCommon extends SeleniumLibrary {
 		jse.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 	
+	
+	/**
+	 * @param data
+	 * @throws Exception
+	 */
+	public void ScrollToElement(WebElement element) throws Exception {
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("arguments[0].scrollIntoView(true);", element);
+	}
+	
+	
 	/**
 	 * @return
 	 * @throws Exception
