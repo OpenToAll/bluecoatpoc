@@ -30,6 +30,7 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 	
 	public void goToDashboar() throws Exception {
 		goToURL(getValue("dashboardurl"));
+		wait(10);
 	}
 	/**
 	 * @param option
@@ -46,7 +47,7 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		click(By.xpath(getValue("selecttype").replace("TITLE", option)), timeout);
 		wait(2);
 		click(By.xpath(getValue("bluecoatsettingsave")), timeout);
-		wait(10);
+		wait(5);
 		log("Successfully Selected Option From Risk Setting");
 	}
 	
@@ -60,7 +61,7 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		click(By.xpath(getValue("selecttype").replace("TITLE", option)), timeout);
 		wait(2);
 		click(By.xpath(getValue("bluecoatsettingsave")), timeout);
-		wait(10);
+		wait(5);
 		log("Successfully Selected Option From Risk Setting");
 	}
 	
@@ -103,19 +104,25 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 
 	public void clickFullReportWebBrowserSitePoints() throws Exception {
 		log("Click Day Graph And Value"); 
-		wait(10);
+		wait(5);
 		webBarGraphSiteAndValue = new ArrayList<String>();
 		String site, viewPageCount;
-		List<WebElement> webSiteGraphPoints = getWebElements((By.xpath(getValue("bluecoatwebbrowsingfullreportgraph"))));
+		String element = getValue("bluecoatwebbrowsingfullreportgraph");
+		List<WebElement> webSiteGraphPoints = getWebElements((By.xpath(element)));
+		log("Size Of WebSite" + webSiteGraphPoints.size());
 		for (WebElement webGrapnPoint : webSiteGraphPoints){
-			ScrollToElement(webGrapnPoint);
-			onMouseOver(webGrapnPoint);
-		//	click(By.xpath(webGrapnPoint), 1);
-			wait(2);
-			site = getText("bluecoatwebbrowsingfulltooltipsite").replaceAll("Site: ", "").trim();
-			viewPageCount = getText("bluecoatwebbrowsingfulltooltipviewcount").replaceAll("Page Views:  ", "").trim();
-			webBarGraphSiteAndValue.add( site +"@" + viewPageCount);
-			log("***** Site " + site + " Page Count" +  viewPageCount + "****");
+			try {
+				ScrollToElement(webGrapnPoint);
+				onMouseOver(webGrapnPoint);
+				webGrapnPoint.click();
+				site = getText("bluecoatwebbrowsingfulltooltipsite").replaceAll("Site: ", "").trim();
+				viewPageCount = getText("bluecoatwebbrowsingfulltooltipviewcount").replaceAll("Page Views: ", "").trim();
+				webBarGraphSiteAndValue.add( site +"@" + viewPageCount);
+				log("***** Site " + site + " Page Count" +  viewPageCount + "****");
+				wait(2);
+			} catch (Exception e) {
+				log("Error " + e.getMessage());
+			}
 	    } 
 		log("Value Of ToolTip " + Arrays.toString(webBarGraphSiteAndValue.toArray()));
 	}
@@ -123,7 +130,7 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 	public boolean verifyGridAndGraphOfWebBrowserSite() throws Exception  {
 		log("Value Of Grid " + Arrays.toString(webBarGrideSiteAndValue.toArray())
 			+ " Value of Graph " + webBarGraphSiteAndValue  );
-		return CollectionUtils.isEqualCollection(webBarGraphSiteAndValue, webBarGrideSiteAndValue);
+		return webBarGrideSiteAndValue.containsAll(webBarGraphSiteAndValue);
 	}
 	
 	

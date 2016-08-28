@@ -41,7 +41,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	 * @throws Exception
 	 */
 	@Test (description = "DashBoard Widget Validation")
-	public void Test_02_BlueCoat_DashBoard_Widget_Validate() throws Exception { 
+	public void Test_03_BlueCoat_DashBoard_Widget_Validate() throws Exception { 
 		List<String> listOfWidgetTitle = blueCoatDashboardPage.getAllWidgetTitles();
 		Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Trend of Threats"), "Title Not found");
 		Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Social Media Applications"), "Title Not found");
@@ -56,8 +56,9 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	 * @throws Exception
 	 */
 	@Test (description = "DashBoard Widget Validation")
-	public void Test_03_BlueCoat_DashBoard_Widget_Enable() throws Exception { 
+	public void Test_04_BlueCoat_DashBoard_Widget_Enable() throws Exception { 
 		log("*****Enable Grid Only, Verify Grid Is Displayed, And Graph Is Not Displayed*****");
+		blueCoatDashboardPage.goToDashboar();
 		blueCoatDashboardPage.clickRiskSetting("Grid Only");
 		Assert.assertTrue(blueCoatDashboardPage.isDisplay("bluecoatriskgrouptable"), "Risk Table Widget Is Not Enable");
 		Assert.assertFalse(blueCoatDashboardPage.isDisplay("bluecoatriskgroupchartnotdisplayed"), "Risk Chart Widget Is Displayed");
@@ -77,8 +78,8 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	/**
 	 * @throws Exception
 	 */
-//	@Test (description = "DashBoard Widget Validation")
-	public void Test_04_BlueCoat_DashBoard_Graph_Value() throws Exception { 
+	@Test (description = "DashBoard Widget Validation")
+	public void Test_05_BlueCoat_DashBoard_Risk_Graph_Value() throws Exception { 
 		log("*****Validate Security In Grid And Graph Tooltip Value Same*****");
 		
 		log("*****Validate Business Related Graph Count With Grid*****");
@@ -93,7 +94,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	}
 	
 	@Test (description = "DashBoard Widget Validation")
-	public void Test_05_BlueCoat_DashBoard_OverviewDayCounts() throws Exception { 
+	public void Test_06_BlueCoat_DashBoard_OverviewDayCounts() throws Exception { 
 		log("*****Dashboard Overview Count*****");
 		
 		log("*****Get Graph Value And Validate With Grid Value*****");
@@ -111,7 +112,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	 * @throws Exception
 	 */
 	@Test (description = "DashBoard Widget Validation")
-	public void Test_06_BlueCoat_DashBoard_Overview_Count() throws Exception { 
+	public void Test_07_BlueCoat_DashBoard_Overview_Count() throws Exception { 
 		log("*****Dashboard Overview Count*****");
 
 		log("*****Client IP Count*****");
@@ -172,7 +173,7 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 	 * @throws Exception
 	 */
 	@Test (description = "Report Validation Year")
-	public void Test_07_BlueCoat_Report_Year() throws Exception { 
+	public void Test_08_BlueCoat_Report_Year() throws Exception { 
 		log("*****Click On Report Center And Verify Grid Displayed*****");
 		blueCoatReportPage.clickReportCenter("bluecoatClickYear");
 		Assert.assertEquals(blueCoatReportPage.getText("bluecoatReportHeader"),"Year","Report Year is Not Displayed");
@@ -183,21 +184,16 @@ public class BlueCoatPOC extends BlueCoatLibrary {
 		log("*****Download Year Data*****");
 		blueCoatReportPage.clickPopUpDownload();
 		
-		
 		log("*****Get Downloaded PDF, Data Read And Verify Grid Table Data Is Present In PDF*****");
 		String result=blueCoatReportPage.getTextFromPDF();
-		
-		
 		Assert.assertTrue(result.contains(getGridValue), "PDF File Not contains Data "  + getGridValue);
-		
-		
 	}
 	
 	/**
 	 * @throws Exception
 	 */
 	@Test (description = "Report Validation Month")
-	public void Test_08_BlueCoat_Report_Month() throws Exception { 
+	public void Test_09_BlueCoat_Report_Month() throws Exception { 
 		log("*****Click On Report Center And Verify Grid Displayed*****");
 		blueCoatReportPage.clickReportCenter("bluecoatClickMonth");
 		Assert.assertEquals(blueCoatReportPage.getText("bluecoatReportHeader"),"Month","Report Month is Not Displayed");
