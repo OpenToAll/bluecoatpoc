@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Smoke Test" verbose="1">
+
+	<listeners>
+		<listener class-name="com.bluecoat.reporter.SuiteListener" />
+		<listener class-name="com.bluecoat.reporter.ReportListener" />
+		<listener class-name="com.bluecoat.reporter.TestListener" />
+	</listeners>
+	<parameter name="browser" value="firefox" />
+	<test name="BLUE COAT POC">
+		<classes>
+			<class name="com.bluecoat.tests.BlueCoatPOCTest">
+				<!-- <methods>
+					<include name="verify_BlueCoat_Login"></include>
+				</methods> -->
+			</class>
+		</classes>
+	</test>
+</suite>
