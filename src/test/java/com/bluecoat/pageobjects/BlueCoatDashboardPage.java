@@ -332,5 +332,14 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		return itemsToAdd;
 	}
 	
+	public void changeDateToAllDates() throws Exception {
+		log("Selecting Option All Dates link from main menu");
+		click(By.xpath(getValue("bluecoatAllDatesLink")), timeout);
+		wait(2);
+		log("Selecting Option All Dates link from sub menu");
+		click(By.xpath(getValue("bluecoatAllDatesSubLink")), timeout);
+		wait(30);
+		log("Successfully Selected Option To All Dates");
+	}
 	
 }

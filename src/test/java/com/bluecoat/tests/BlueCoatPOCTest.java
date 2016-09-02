@@ -57,6 +57,8 @@ public class BlueCoatPOCTest extends BaseTest {
 
 		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
 		m_blueCoatDashboardPage.goToDashboard();
+		m_blueCoatDashboardPage.changeDateToAllDates();
+		
 		m_blueCoatDashboardPage.ScrollToElement("bluecoatwebbrowsingfullreportlink");
 		m_blueCoatDashboardPage.getGridValueOfWebBrowserSite();
 		m_blueCoatDashboardPage.clickWebBrowsingSiteFullReport();
@@ -75,7 +77,10 @@ public class BlueCoatPOCTest extends BaseTest {
 	@TestDetail(testCaseID = "BC_3", testCaseName = "DashBoard Grid Validation", author = "abc@bluecoat.com")
 	public void verify_BlueCoat_DashBoard_Widget_Validate() throws Exception {
 
+		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
 		m_blueCoatDashboardPage.goToDashboard();
+		m_blueCoatDashboardPage.changeDateToAllDates();
+		
 		List<String> listOfWidgetTitle = m_blueCoatDashboardPage.getAllWidgetTitles();
 		Assert.assertTrue(m_blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Trend of Threats"),
 				"Title Not found");
@@ -102,7 +107,10 @@ public class BlueCoatPOCTest extends BaseTest {
 	public void verify_BlueCoat_DashBoard_Widget_Enable() throws Exception {
 
 		log("*****Enable Grid Only, Verify Grid Is Displayed, And Graph Is Not Displayed*****");
+		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
 		m_blueCoatDashboardPage.goToDashboard();
+		m_blueCoatDashboardPage.changeDateToAllDates();
+		
 		m_blueCoatDashboardPage.clickRiskSetting("Grid Only");
 		Assert.assertTrue(m_blueCoatDashboardPage.isDisplay("bluecoatriskgrouptable"),
 				"Risk Table Widget Is Not Enable");
@@ -135,6 +143,9 @@ public class BlueCoatPOCTest extends BaseTest {
 	public void verify_BlueCoat_DashBoard_Risk_Graph_Value() throws Exception {
 
 		log("*****Validate Security In Grid And Graph Tooltip Value Same*****");
+		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
+		m_blueCoatDashboardPage.goToDashboard();
+		m_blueCoatDashboardPage.changeDateToAllDates();
 
 		log("*****Validate Business Related Graph Count With Grid*****");
 		String value = m_blueCoatDashboardPage.getValueInGrid("Business Related");
@@ -156,7 +167,11 @@ public class BlueCoatPOCTest extends BaseTest {
 	public void verify_BlueCoat_DashBoard_OverviewDayCounts() throws Exception {
 
 		log("*****Dashboard Overview Count*****");
+		
+		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
 		m_blueCoatDashboardPage.goToDashboard();
+		m_blueCoatDashboardPage.changeDateToAllDates();
+		
 		log("*****Get Graph Value And Validate With Grid Value*****");
 		dashBoardValueBusinessRelated = m_blueCoatDashboardPage.getValueInGrid(selectField);
 		m_blueCoatDashboardPage.clickLinkInGrid(selectField);
@@ -179,6 +194,10 @@ public class BlueCoatPOCTest extends BaseTest {
 	public void verify_BlueCoat_DashBoard_Overview_Count() throws Exception {
 
 		log("*****Dashboard Overview Count*****");
+		
+		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
+		m_blueCoatDashboardPage.goToDashboard();
+		m_blueCoatDashboardPage.changeDateToAllDates();
 
 		log("*****Client IP Count*****");
 		String count = m_blueCoatDashboardPage.getText("bluecoatoverviewpage", "Client IP");
@@ -246,7 +265,10 @@ public class BlueCoatPOCTest extends BaseTest {
 		
 		log("*****Click On Report Center And Verify Grid Displayed*****");
 
+		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
 		m_blueCoatDashboardPage.goToDashboard();
+		m_blueCoatDashboardPage.changeDateToAllDates();
+		
 		m_blueCoatReportPage = new BlueCoatReportPage(driver);
 		m_blueCoatReportPage.clickReportCenter("bluecoatClickYear");
 		Assert.assertEquals(m_blueCoatReportPage.getText("bluecoatReportHeader"), "Year",
@@ -275,7 +297,10 @@ public class BlueCoatPOCTest extends BaseTest {
 
 		log("*****Click On Report Center And Verify Grid Displayed*****");
 
+		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
 		m_blueCoatDashboardPage.goToDashboard();
+		m_blueCoatDashboardPage.changeDateToAllDates();
+		
 		m_blueCoatReportPage.clickReportCenter("bluecoatClickMonth");
 		Assert.assertEquals(m_blueCoatReportPage.getText("bluecoatReportHeader"), "Month",
 				"Report Month is Not Displayed");
