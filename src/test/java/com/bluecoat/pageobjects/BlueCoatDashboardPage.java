@@ -71,6 +71,7 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		String requestStrTooltipValue, dayTooltipDay;
 		List<WebElement> dayGraphPoints = getWebElements((By.xpath(getValue("bluecoatoverviewdaygraphpoint"))));
 		for (WebElement dayGrapnPoint : dayGraphPoints){
+			ScrollToElement(dayGrapnPoint);
 			onMouseOver(dayGrapnPoint);
 			dayGrapnPoint.click();
 			requestStrTooltipValue = getText("bluecoattooltiprequest").replaceAll("Requests: ", "").trim();
@@ -244,7 +245,10 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 			try {
 				String element = getValue("bluecoatriskgroupchartgraph").replaceAll("INDEX", i +"");
 				log("Element " + element);
+				
+				ScrollToElement(element);
 				onMouseOver(By.xpath(element));
+				
 				click(By.xpath(element), 1);
 				wait(1);
 				String tooltipvalue = getToolTipValue();
