@@ -89,11 +89,8 @@ public class BlueCoatPOCTest extends BaseTest {
 		Assert.assertTrue(m_blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Risk Groups"), "Title Not found");
 		Assert.assertTrue(m_blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Web Browsing per Site"),
 				"Title Not found");
-		// Assert.assertTrue(blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle,
-		// "Web Browsing per Category"), "Title Not found");
 		Assert.assertTrue(m_blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Web Browsing per User"),
 				"Title Not found");
-		//Assert.assertTrue(listOfWidgetTitle.size() == 6, "All Title Not Found Count " + listOfWidgetTitle.size());
 	}
 
 	/**
