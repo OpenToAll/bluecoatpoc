@@ -10,7 +10,7 @@
 	<parameter name="browser" value="firefox" />
 	<test name="BLUE COAT POC">
 		<classes>
-			<class name="com.bluecoat.tests.BlueCoatPOC_SikuliTest">
+			<class name="com.bluecoat.tests.BlueCoatPOCTest">
 				<!-- <methods>
 					<include name="verify_BlueCoat_Login"></include>
 				</methods> -->
