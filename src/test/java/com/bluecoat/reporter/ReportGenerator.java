@@ -200,12 +200,12 @@ public class ReportGenerator {
 		sb.append("<td><font  size=2>BUILD NUMBER </td><td width=20 align='center' size=2>  "
 				+ JenkinsConnector.getBuildNo() + " </td> </font></tr>");
 		sb.append("<td><font  size=2>BROWSER TESTED </td><td width=20 align='center' size=2>  "
-				+ Global.executionDetailsMap.get("Browser") + "</td> </font></tr>");
+				+ Global.executionDetailsMap.get("Browser").toUpperCase() + "</td> </font></tr>");
 		sb.append("<td><font  size=2>PLATFORM </td><td width=20 align='center' size=2>  "
 				+ Global.executionDetailsMap.get("Platform") + "</td> </font></tr>");
 		sb.append("<td><font  size=2>DATE OF EXECUTION  </td><td width=20 align='center' size=2>  " + new Date()
 				+ " </td> </font></tr>");
-		sb.append("<td><font  size=2>APP VERSION  </td><td width=20 align='center' size=2>  " + "1.0"
+		sb.append("<td><font  size=2>APP VERSION  </td><td width=20 align='center' size=2>  " + "xxx"
 				+ " </td> </font></tr>");
 
 		String reportLink = JenkinsConnector.getBuildUrl() + "/testReport/";

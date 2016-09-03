@@ -5,10 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URI;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -29,13 +27,6 @@ import org.testng.xml.XmlSuite;
 
 import com.bluecoat.library.Global;
 
-import microsoft.exchange.webservices.data.core.ExchangeService;
-import microsoft.exchange.webservices.data.core.enumeration.misc.ExchangeVersion;
-import microsoft.exchange.webservices.data.core.service.item.EmailMessage;
-import microsoft.exchange.webservices.data.credential.ExchangeCredentials;
-import microsoft.exchange.webservices.data.credential.WebCredentials;
-import microsoft.exchange.webservices.data.property.complex.MessageBody;
-
 /**
  * This Custom reporter assumes that there is only one suite 
  *
@@ -45,8 +36,6 @@ public class ReportListener implements IReporter {
 	// Input streamer to hold the HTML content to be flushed to the file at the end
     protected PrintWriter m_writer;
 
-    private final StringBuffer m_report = new StringBuffer();
-    private final StringBuffer m_emailReport = new StringBuffer();
     // List of Suites
     List<ISuite> m_suites = Lists.newArrayList();
     
@@ -59,7 +48,7 @@ public class ReportListener implements IReporter {
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites,
             String outputDirectory) {
         try {
-        	m_writer = createWriter(outputDirectory);
+            m_writer = createWriter(outputDirectory);
         } catch (IOException e) {
          // System.out.print("Unable to create output file", e);
             return;
@@ -71,18 +60,10 @@ public class ReportListener implements IReporter {
 
         writeDocumentStart();
         writeHead();
-        writeBody(true);
+        writeBody();
         writeDocumentEnd();
 
-        m_writer.print(m_report);
         m_writer.close();
-        
-        try {
-			sendMailViaExchnageService("Madhusudhan.JR@apollo.edu", "Itcinfotech5%", "HI", m_emailReport.toString(), Arrays.asList("Madhusudhan.JR@apollo.edu"));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
     }
 
     protected PrintWriter createWriter(String outdir) throws IOException {
@@ -91,90 +72,76 @@ public class ReportListener implements IReporter {
                 outdir, "BlueCoat_TestExecution_Report.html"))));
     }
 
-    protected void createWriter(String outdir, StringBuffer s) throws IOException {
-		new File(outdir).mkdirs();
-
-		PrintWriter m_writer = new PrintWriter(new BufferedWriter(new FileWriter(new File(outdir, "Execution_Report.html"))));
-		m_writer.print(s);
-		m_writer.close();
-	}
-
-    
     protected void writeDocumentStart() {
-        m_report.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">");
-        m_report.append("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
+        m_writer.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">");
+        m_writer.print("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
     }
 
     protected void writeHead() {
 
-		m_report.append("<head>");
-		m_report.append("<title>Blue Coat Test Execution Report</title>");
+		m_writer.println("<head>");
+		m_writer.println("<title>Blue Coat Test Execution Report</title>");
 		writeStylesheet();
 		writeScript();		
-		m_report.append("</head>");
+		m_writer.println("</head>");
     }
 
     protected void writeStylesheet() {
-		m_report.append("<style type=\"text/css\">");
-		m_report.append("body {font-family: \"Lucida Sans Unicode\";}");
-		m_report.append("table {margin: 10px auto 30px auto;border: 1px; border-collapse: collapse; bordercolor: \"grey\";font-size: 12px;}");
-		m_report.append("td,th {border:1px solid #009;padding:.25em .5em}");
-		m_report.append(".head th {background-color: #000000; color: white; border:1px solid #009;padding:.25em .5em}");
-		m_report.append(".result th {vertical-align:bottom}");
-		m_report.append(".param th {padding-left:1em;padding-right:1em}");
-		m_report.append(".param td {padding-left:.5em;padding-right:2em}");
-		m_report.append(".stripe td,.stripe th {background-color: #E6EBF9}");
-		m_report.append(".numi,.numi_attn,.numi_skip {text-align:right}");
-		m_report.append(".total td {font-weight:bold}");
-		m_report.append(".passedodd td {background-color: #C4FF89}");
-		m_report.append(".passedeven td {background-color: #C4FF89}");
-		m_report.append(".skippedodd td,.numi_skip {background-color: #D8D8CF}");
-		m_report.append(".skippedeven td,.stripe .numi_skip {background-color: #D8D8CF}");
-		m_report.append(".failedodd td,.numi_attn {background-color: #FF8566}");
-		m_report.append(".failedeven td,.stripe .numi_attn {background-color: #FF8566}");
-		m_report.append(".stacktrace {white-space:pre;font-family:monospace}");
-		m_report.append(".totop {font-size:85%;text-align:center;border-bottom:2px solid #000}");
-		m_report.append("</style>");
+		m_writer.println("<style type=\"text/css\">");
+		m_writer.println("body {font-family: \"Lucida Sans Unicode\";}");
+		m_writer.println("table {margin: 10px auto 30px auto;border: 1px; border-collapse: collapse; bordercolor: \"grey\";font-size: 12px;}");
+		m_writer.println("td,th {border:1px solid #009;padding:.25em .5em}");
+		m_writer.println(".head th {background-color: #000000; color: white; border:1px solid #009;padding:.25em .5em}");
+		m_writer.println(".result th {vertical-align:bottom}");
+		m_writer.println(".param th {padding-left:1em;padding-right:1em}");
+		m_writer.println(".param td {padding-left:.5em;padding-right:2em}");
+		m_writer.println(".stripe td,.stripe th {background-color: #E6EBF9}");
+		m_writer.println(".numi,.numi_attn,.numi_skip {text-align:right}");
+		m_writer.println(".total td {font-weight:bold}");
+		m_writer.println(".passedodd td {background-color: #C4FF89}");
+		m_writer.println(".passedeven td {background-color: #C4FF89}");
+		m_writer.println(".skippedodd td,.numi_skip {background-color: #D8D8CF}");
+		m_writer.println(".skippedeven td,.stripe .numi_skip {background-color: #D8D8CF}");
+		m_writer.println(".failedodd td,.numi_attn {background-color: #FF8566}");
+		m_writer.println(".failedeven td,.stripe .numi_attn {background-color: #FF8566}");
+		m_writer.println(".stacktrace {white-space:pre;font-family:monospace}");
+		m_writer.println(".totop {font-size:85%;text-align:center;border-bottom:2px solid #000}");
+		m_writer.println("</style>");
     }
     
     protected void writeScript(){
-    	m_report.append("<script>");
-		m_report.append("hide=false;");
-		m_report.append("function toggleTable(x)");
-		m_report.append("{");
-		m_report.append("var lTable = document.getElementById(x);");
-		m_report.append("lTable.style.display = (lTable.style.display == \"table\") ? \"none\" : \"table\";");
-		m_report.append("}");
-		m_report.append("</script>");
+    	m_writer.println("<script>");
+		m_writer.println("hide=false;");
+		m_writer.println("function toggleTable(x)");
+		m_writer.println("{");
+		m_writer.println("var lTable = document.getElementById(x);");
+		m_writer.println("lTable.style.display = (lTable.style.display == \"table\") ? \"none\" : \"table\";");
+		m_writer.println("}");
+		m_writer.println("</script>");
     	
     }
 
-    protected void writeBody(boolean sendEMail) {
-        m_report.append("<body>");
+    protected void writeBody() {
+        m_writer.print("<body>");
         writeBodyHeader();
         writeRunParameters();
         writeSuiteSummary();
         writeScenarioSummary();
-        
-        if (sendEMail)
-        	m_emailReport.append(m_report);
-        
-        
         writeScenarioDetails();
-        m_report.append("</div></div></div></body>");
+        m_writer.print("</div></div></div></body>");
     }
 
     private void writeBodyHeader() {
     	
-    	m_report.append("<div id=\"header\"");
-    	m_report.append("style=\"background-color: #000000; width: 100%; position: absolute; height: 90px; top: 0px; left: 0px\">");
-    	m_report.append("<h1 style=\"align: left; margin-left: 10px; color: white; font-size: 25px;\">Blue Coat Test Execution Report</h1>");
-    	m_report.append("<h3 style=\"align: right; margin-left: 10px; color: white; font-size: 10px;\"> " + BuildVersion.printVersion() + "</h3>");
-    	m_report.append("<div id=\"body\" style=\"width: 100%; position: relative; \">");
-    	m_report.append("<div id=\"run information\">");
-    	m_report.append("<h2 style=\"align: left; margin-left: 10px; color: black; font-size: 15px;\">Execution Start Time:" 
+    	m_writer.println("<div id=\"header\"");
+    	m_writer.println("style=\"background-color: #000000; width: 100%; position: absolute; height: 90px; top: 0px; left: 0px\">");
+    	m_writer.println("<h1 style=\"align: left; margin-left: 10px; color: white; font-size: 25px;\">Blue Coat Test Execution Report</h1>");
+    	m_writer.println("<h3 style=\"align: right; margin-left: 10px; color: white; font-size: 10px;\"> " + BuildVersion.printVersion() + "</h3>");
+    	m_writer.println("<div id=\"body\" style=\"width: 100%; position: relative; \">");
+    	m_writer.println("<div id=\"run information\">");
+    	m_writer.println("<h2 style=\"align: left; margin-left: 10px; color: black; font-size: 15px;\">Execution Start Time:" 
     					+ SuiteListener.getSuiteStartTime()  + "</h2>");
-    	m_report.append("</div>");
+    	m_writer.println("</div>");
 		
 	}
 
@@ -183,7 +150,7 @@ public class ReportListener implements IReporter {
      */
     private void writeRunParameters() {
     	
-    	m_report.append("<div id=\"run details\">");
+    	m_writer.println("<div id=\"run details\">");
 
 		for (ISuite suite : m_suites) {
 
@@ -215,22 +182,22 @@ public class ReportListener implements IReporter {
 			row += "<td>" + Global.executionDetailsMap.get("Platform") + "</td>";
 			noOfColumns++;
 
-			m_report.append("<tr><th class=\"head\" colspan=\"" + noOfColumns + "\">Run Parameters</th></tr>");
-			m_report.append("<tr>");
-			m_report.append(Header);
-			m_report.append("</tr>");
-			m_report.append("<tr bgcolor=\"#F0F8FF\">");
-			m_report.append(row);
-			m_report.append("</tr>");
+			m_writer.print("<tr><th class=\"head\" colspan=\"" + noOfColumns + "\">Run Parameters</th></tr>");
+			m_writer.print("<tr>");
+			m_writer.println(Header);
+			m_writer.println("</tr>");
+			m_writer.print("<tr bgcolor=\"#F0F8FF\">");
+			m_writer.println(row);
+			m_writer.println("</tr>");
 
 		}
-		m_report.append("</table>");
-		m_report.append("<p></p>");
+		m_writer.println("</table>");
+		m_writer.println("<p></p>");
 		
 	}
 
 	protected void writeDocumentEnd() {
-        m_report.append("</html>");
+        m_writer.print("</html>");
     }
 
     protected void writeSuiteSummary() {
@@ -243,18 +210,18 @@ public class ReportListener implements IReporter {
         int testIndex = 0;
         for (SuiteResult suiteResult : m_suiteResults) {
             this.writeTableStart(Utils.escapeHtml(suiteResult.getSuiteName()), null);
-            m_report.append("<tr><th class=\"head\" colspan=\"7\">");
-            m_report.append(Utils.escapeHtml(suiteResult.getSuiteName()));
-            m_report.append("</th></tr>");
-            m_report.append("<tr>");
-            m_report.append("<th>Test</th>");
-            m_report.append("<th># Passed</th>");
-            m_report.append("<th># Skipped</th>");
-            m_report.append("<th># Failed</th>");
-            m_report.append("<th>Time (ms)</th>");
-            m_report.append("<th>Included Groups</th>");
-            m_report.append("<th>Excluded Groups</th>");
-            m_report.append("</tr>");
+            m_writer.print("<tr><th class=\"head\" colspan=\"7\">");
+            m_writer.print(Utils.escapeHtml(suiteResult.getSuiteName()));
+            m_writer.print("</th></tr>");
+            m_writer.print("<tr>");
+            m_writer.print("<th>Test</th>");
+            m_writer.print("<th># Passed</th>");
+            m_writer.print("<th># Skipped</th>");
+            m_writer.print("<th># Failed</th>");
+            m_writer.print("<th>Time (ms)</th>");
+            m_writer.print("<th>Included Groups</th>");
+            m_writer.print("<th>Excluded Groups</th>");
+            m_writer.print("</tr>");
             
             for (TestResult testResult : suiteResult.getTestResults()) {
                 int passedTests = testResult.getPassedTestCount();
@@ -262,11 +229,11 @@ public class ReportListener implements IReporter {
                 int failedTests = testResult.getFailedTestCount();
                 long duration = testResult.getDuration();
 
-                m_report.append("<tr");
+                m_writer.print("<tr");
                 if ((testIndex % 2) == 1) {
-                    m_report.append(" class=\"stripe\"");
+                    m_writer.print(" class=\"stripe\"");
                 }
-                m_report.append(">");
+                m_writer.print(">");
 
                 m_buffer.setLength(0);
                 writeTableData(m_buffer.append("<a href=\"#t").append(testIndex)
@@ -282,7 +249,7 @@ public class ReportListener implements IReporter {
                 writeTableData(testResult.getIncludedGroups());
                 writeTableData(testResult.getExcludedGroups());
 
-                m_report.append("</tr>");
+                m_writer.print("</tr>");
 
                 totalPassedTests += passedTests;
                 totalSkippedTests += skippedTests;
@@ -294,8 +261,8 @@ public class ReportListener implements IReporter {
 
         // Print totals if there was more than one test
         if (testIndex > 1) {
-            m_report.append("<tr>");
-            m_report.append("<th>Total</th>");
+            m_writer.print("<tr>");
+            m_writer.print("<th>Total</th>");
             writeTableHeader(integerFormat.format(totalPassedTests), "numi");
             writeTableHeader(integerFormat.format(totalSkippedTests),
                     (totalSkippedTests > 0 ? "numi_skip" : "numi"));
@@ -304,11 +271,11 @@ public class ReportListener implements IReporter {
             writeTableHeader(formatDuration( 
             		SuiteListener.getSuiteEndTime().getTime() - SuiteListener.getSuiteStartTime().getTime()),
 					"numi");
-            m_report.append("<th colspan=\"2\"></th>");
-            m_report.append("</tr>");
+            m_writer.print("<th colspan=\"2\"></th>");
+            m_writer.print("</tr>");
         }
 
-        m_report.append("</table>");
+        m_writer.print("</table>");
     }
 
     /**
@@ -317,24 +284,24 @@ public class ReportListener implements IReporter {
     protected void writeScenarioSummary() {
         
         this.writeTableStart("Method Summary", null);
-        m_report.append("<thead>");
-        m_report.append("<tr><th id=\"summary\" class=\"head\" colspan=\"6\"> Run Details</th></tr>");
-        m_report.append("<tr>");
-        m_report.append("<th>Test Case ID</th>");
-        m_report.append("<th>Test Description</th>");
-        m_report.append("<th>Test Method</th>");
-        m_report.append("<th>Start</th>");
-        m_report.append("<th>Time<br>elapsed</th>");
-        m_report.append("<th>Detail</th></tr>");
+        m_writer.print("<thead>");
+        m_writer.print("<tr><th id=\"summary\" class=\"head\" colspan=\"6\"> Run Details</th></tr>");
+        m_writer.print("<tr>");
+        m_writer.println("<th>Test Case ID</th>");
+        m_writer.println("<th>Test Description</th>");
+        m_writer.println("<th>Test Method</th>");
+        m_writer.println("<th>Start</th>");
+        m_writer.println("<th>Time<br>elapsed</th>");
+        m_writer.println("<th>Detail</th></tr>");
 
         int testIndex = 0;
         int scenarioIndex = 0;
         for (SuiteResult suiteResult : m_suiteResults) {
         	
             for (TestResult testResult : suiteResult.getTestResults()) {
-                m_report.append("<tbody id=\"t");
-                m_report.append(testIndex);
-                m_report.append("\">");
+                m_writer.print("<tbody id=\"t");
+                m_writer.print(testIndex);
+                m_writer.print("\">");
 
                 String testName = Utils.escapeHtml(suiteResult.getSuiteName()) + "::" + Utils.escapeHtml(testResult.getTestName());
 
@@ -364,13 +331,13 @@ public class ReportListener implements IReporter {
                         scenarioIndex ,
                         suiteResult.getLogAndReportPath());
 
-                m_report.append("</tbody>");
+                m_writer.print("</tbody>");
 
                 testIndex++;
             }
         }
 
-        m_report.append("</table>");
+        m_writer.print("</table>");
     }
 
     /**
@@ -382,9 +349,9 @@ public class ReportListener implements IReporter {
             int startingScenarioIndex, String dirPathToLogs) {
         int scenarioCount = 0;
         if (!classResults.isEmpty()) {
-            m_report.append("<tr><th colspan=\"6\">");
-            m_report.append(description);
-            m_report.append("</th></tr>");
+            m_writer.print("<tr><th colspan=\"6\">");
+            m_writer.print(description);
+            m_writer.print("</th></tr>");
 
             int scenarioIndex = startingScenarioIndex;
             int classIndex = 0;
@@ -502,7 +469,7 @@ public class ReportListener implements IReporter {
                 }
 
                 // Write the test results for the class
-                m_report.append(m_buffer);
+                m_writer.print(m_buffer);
 
                 classIndex++;
             }
@@ -518,10 +485,10 @@ public class ReportListener implements IReporter {
         int scenarioIndex = 0;
         for (SuiteResult suiteResult : m_suiteResults) {
             for (TestResult testResult : suiteResult.getTestResults()) {
-                m_report.append("<h3>");
-                m_report.append("TEST : " + Utils.escapeHtml(testResult.getTestName()) +
+                m_writer.print("<h3>");
+                m_writer.print("TEST : " + Utils.escapeHtml(testResult.getTestName()) +
                 		 "  Test Method Run Details");
-                m_report.append("</h3>");
+                m_writer.print("</h3>");
 
                 scenarioIndex += writeScenarioDetails(
                         testResult.getFailedConfigurationResults(),
@@ -572,11 +539,11 @@ public class ReportListener implements IReporter {
      */
     private void writeScenario(int scenarioIndex, String label,
             ITestResult result) {
-        m_report.append("<h4 id=\"m");
-        m_report.append(scenarioIndex);
-        m_report.append("\">");
-        m_report.append(label);
-        m_report.append("</h4>");
+        m_writer.print("<h4 id=\"m");
+        m_writer.print(scenarioIndex);
+        m_writer.print("\">");
+        m_writer.print(label);
+        m_writer.print("</h4>");
 
         writeTableStart("Result Summarry", null);
 
@@ -584,88 +551,88 @@ public class ReportListener implements IReporter {
         Object[] parameters = result.getParameters();
         int parameterCount = (parameters == null ? 0 : parameters.length);
         if (parameterCount > 0) {
-            m_report.append("<tr class=\"param\">");
+            m_writer.print("<tr class=\"param\">");
             for (int i = 1; i <= parameterCount; i++) {
-                m_report.append("<th>Parameter #");
-                m_report.append(i);
-                m_report.append("</th>");
+                m_writer.print("<th>Parameter #");
+                m_writer.print(i);
+                m_writer.print("</th>");
             }
-            m_report.append("</tr><tr class=\"param stripe\">");
+            m_writer.print("</tr><tr class=\"param stripe\">");
             for (Object parameter : parameters) {
-                m_report.append("<td>");
-               m_report.append(Utils.escapeHtml(Utils.toString(parameter, null)));
-                m_report.append("</td>");
+                m_writer.print("<td>");
+               m_writer.print(Utils.escapeHtml(Utils.toString(parameter, null)));
+                m_writer.print("</td>");
             }
-            m_report.append("</tr>");
+            m_writer.print("</tr>");
         }
 
         // Write reporter messages (if any)
         List<String> reporterMessages = Reporter.getOutput(result);
         if (!reporterMessages.isEmpty()) {
-            m_report.append("<tr><th");
+            m_writer.print("<tr><th");
             if (parameterCount > 1) {
-                m_report.append(" colspan=\"");
-                m_report.append(parameterCount);
-                m_report.append("\"");
+                m_writer.print(" colspan=\"");
+                m_writer.print(parameterCount);
+                m_writer.print("\"");
             }
-            m_report.append(">Messages</th></tr>");
+            m_writer.print(">Messages</th></tr>");
 
-            m_report.append("<tr><td");
+            m_writer.print("<tr><td");
             if (parameterCount > 1) {
-                m_report.append(" colspan=\"");
-                m_report.append(parameterCount);
-                m_report.append("\"");
+                m_writer.print(" colspan=\"");
+                m_writer.print(parameterCount);
+                m_writer.print("\"");
             }
-            m_report.append(">");
+            m_writer.print(">");
             writeReporterMessages(reporterMessages);
-            m_report.append("</td></tr>");
+            m_writer.print("</td></tr>");
         }
 
         // Write exception (if any)
         Throwable throwable = result.getThrowable();
         if (throwable != null) {
-            m_report.append("<tr><th");
+            m_writer.print("<tr><th");
             if (parameterCount > 1) {
-                m_report.append(" colspan=\"");
-                m_report.append(parameterCount);
-                m_report.append("\"");
+                m_writer.print(" colspan=\"");
+                m_writer.print(parameterCount);
+                m_writer.print("\"");
             }
-            m_report.append(">");
-            m_report.append((result.getStatus() == ITestResult.SUCCESS ? "Expected Exception"
+            m_writer.print(">");
+            m_writer.print((result.getStatus() == ITestResult.SUCCESS ? "Expected Exception"
                     : "Exception"));
-            m_report.append("</th></tr>");
+            m_writer.print("</th></tr>");
 
-            m_report.append("<tr><td");
+            m_writer.print("<tr><td");
             if (parameterCount > 1) {
-                m_report.append(" colspan=\"");
-                m_report.append(parameterCount);
-                m_report.append("\"");
+                m_writer.print(" colspan=\"");
+                m_writer.print(parameterCount);
+                m_writer.print("\"");
             }
-            m_report.append(">");
+            m_writer.print(">");
             writeStackTrace(throwable);
-            m_report.append("</td></tr>");
+            m_writer.print("</td></tr>");
         }
 
-        m_report.append("</table>");
-        m_report.append("<p class=\"totop\"><a href=\"#summary\">back to summary</a></p>");
+        m_writer.print("</table>");
+        m_writer.print("<p class=\"totop\"><a href=\"#summary\">back to summary</a></p>");
     }
 
     protected void writeReporterMessages(List<String> reporterMessages) {
-        m_report.append("<div class=\"messages\">");
+        m_writer.print("<div class=\"messages\">");
         Iterator<String> iterator = reporterMessages.iterator();
         assert iterator.hasNext();
-        m_report.append(Utils.escapeHtml(iterator.next()));
+        m_writer.print(Utils.escapeHtml(iterator.next()));
         while (iterator.hasNext()) {
-            m_report.append("<br/>");
-            m_report.append(Utils.escapeHtml(iterator.next()));
+            m_writer.print("<br/>");
+            m_writer.print(Utils.escapeHtml(iterator.next()));
         }
-        m_report.append("</div>");
+        m_writer.print("</div>");
     }
 
     protected void writeStackTrace(Throwable throwable) {
-        m_report.append("<div class=\"stacktrace\">");
-        m_report.append(Utils.stackTrace(throwable, true)[0]);
-        m_report.append("</div>");
+        m_writer.print("<div class=\"stacktrace\">");
+        m_writer.print(Utils.stackTrace(throwable, true)[0]);
+        m_writer.print("</div>");
     }
 
     /**
@@ -676,7 +643,7 @@ public class ReportListener implements IReporter {
      * @param id
      */
     protected void writeTableStart(String cssclass, String id) {
-    	m_report.append("<table cellspacing=\"0\" cellpadding=\"0\""
+    	m_writer.println("<table cellspacing=\"0\" cellpadding=\"0\""
 				+ (cssclass != null ? " class=\"" + cssclass + "\""
 						: " style=\"padding-bottom:2em\"")
 				+ (id != null ? " id=\"" + id + "\"" : "") + ">");
@@ -731,18 +698,18 @@ public class ReportListener implements IReporter {
      *            classes to apply
      */
     protected void writeTag(String tag, String html, String cssClasses) {
-        m_report.append("<");
-        m_report.append(tag);
+        m_writer.print("<");
+        m_writer.print(tag);
         if (cssClasses != null) {
-            m_report.append(" class=\"");
-            m_report.append(cssClasses);
-            m_report.append("\"");
+            m_writer.print(" class=\"");
+            m_writer.print(cssClasses);
+            m_writer.print("\"");
         }
-        m_report.append(">");
-        m_report.append(html);
-        m_report.append("</");
-        m_report.append(tag);
-        m_report.append(">");
+        m_writer.print(">");
+        m_writer.print(html);
+        m_writer.print("</");
+        m_writer.print(tag);
+        m_writer.print(">");
     }
     
     /**
@@ -1077,38 +1044,5 @@ public class ReportListener implements IReporter {
             return results;
         }
     }
-    
-    
-    /**
-	 * This method is used to send the mail programmatically using Microsoft
-	 * Exchange Java service
-	 * 
-	 * @param username
-	 * @param password
-	 * @param toAddressList
-	 * @throws Exception
-	 */
-	public void sendMailViaExchnageService(String username, String password, String subject, String body, List<String> toAddressList) throws Exception {
-
-		Log.info("Enter sendMailViaExchnageService");
-
-		ExchangeService service = new ExchangeService(ExchangeVersion.Exchange2010_SP2);
-
-		ExchangeCredentials credentials = new WebCredentials(username, password);
-		service.setCredentials(credentials);
-		service.setUrl(new URI("https://outlook.office365.com/EWS/Exchange.asmx"));
-
-		EmailMessage msg = new EmailMessage(service);
-		msg.setSubject(subject);
-		msg.setBody(MessageBody.getMessageBodyFromText(body));
-
-		Iterator<String> mailList = toAddressList.iterator();
-
-		msg.getToRecipients().addSmtpAddressRange(mailList);
-		msg.send();
-
-		Log.info("Exit sendMailViaExchnageService");
-	}
-	
 }
 
