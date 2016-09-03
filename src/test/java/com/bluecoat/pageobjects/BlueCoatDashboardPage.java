@@ -71,7 +71,7 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		String requestStrTooltipValue, dayTooltipDay;
 		List<WebElement> dayGraphPoints = getWebElements((By.xpath(getValue("bluecoatoverviewdaygraphpoint"))));
 		for (WebElement dayGrapnPoint : dayGraphPoints){
-			ScrollToElement(dayGrapnPoint);
+			//ScrollToElement(dayGrapnPoint);
 			onMouseOver(dayGrapnPoint);
 			dayGrapnPoint.click();
 			requestStrTooltipValue = getText("bluecoattooltiprequest").replaceAll("Requests: ", "").trim();
@@ -113,7 +113,7 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		log("Size Of WebSite" + webSiteGraphPoints.size());
 		for (WebElement webGrapnPoint : webSiteGraphPoints){
 			try {
-				ScrollToElement(webGrapnPoint);
+				//ScrollToElement(webGrapnPoint);
 				onMouseOver(webGrapnPoint);
 				webGrapnPoint.click();
 				site = getText("bluecoatwebbrowsingfulltooltipsite").replaceAll("Site: ", "").trim();

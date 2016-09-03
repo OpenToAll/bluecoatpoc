@@ -93,7 +93,7 @@ public class BlueCoatPOCTest extends BaseTest {
 		// "Web Browsing per Category"), "Title Not found");
 		Assert.assertTrue(m_blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Web Browsing per User"),
 				"Title Not found");
-		Assert.assertTrue(listOfWidgetTitle.size() == 6, "All Title Not Found Count " + listOfWidgetTitle.size());
+		//Assert.assertTrue(listOfWidgetTitle.size() == 6, "All Title Not Found Count " + listOfWidgetTitle.size());
 	}
 
 	/**
