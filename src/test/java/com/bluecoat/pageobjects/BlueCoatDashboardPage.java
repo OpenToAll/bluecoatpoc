@@ -340,7 +340,7 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		wait(2);
 		log("Selecting Option All Dates link from sub menu");
 		click(By.xpath(getValue("bluecoatAllDatesSubLink")), timeout);
-		wait(30);
+		wait(15);
 		log("Successfully Selected Option To All Dates");
 	}
 	

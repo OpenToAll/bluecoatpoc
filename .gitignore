@@ -12,3 +12,7 @@
 /test-output/
 
 log/verify_BlueCoat_DashBoard_Widget_Validate.log
+
+log/verify_BlueCoat_DashBoard_Overview_Count.log
+
+log/verify_BlueCoat_Login.log

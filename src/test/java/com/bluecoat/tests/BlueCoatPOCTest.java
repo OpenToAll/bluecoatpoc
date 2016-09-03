@@ -198,7 +198,10 @@ public class BlueCoatPOCTest extends BaseTest {
 		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
 		m_blueCoatDashboardPage.goToDashboard();
 		m_blueCoatDashboardPage.changeDateToAllDates();
-
+		
+		dashBoardValueBusinessRelated = m_blueCoatDashboardPage.getValueInGrid(selectField);
+		m_blueCoatDashboardPage.clickLinkInGrid(selectField);
+		m_blueCoatDashboardPage.clickOverviewSetting("Both Grid and Chart", "Day");
 		log("*****Client IP Count*****");
 		String count = m_blueCoatDashboardPage.getText("bluecoatoverviewpage", "Client IP");
 		Assert.assertTrue(count.equals(dashBoardValueBusinessRelated), selectField + "Dashboard Value "
