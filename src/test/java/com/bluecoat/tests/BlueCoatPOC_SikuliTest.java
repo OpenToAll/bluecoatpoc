@@ -39,7 +39,6 @@ public class BlueCoatPOC_SikuliTest extends BaseTest {
 	@TestDetail(testCaseID = "BC_1", testCaseName = "Verify Login To Blue Coat", author = "abc@bluecoat.com")
 	public void verify_BlueCoat_Message_Close_Sikuli() throws Exception {
 		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
-		//m_blueCoatDashboardPage.goToDashboard();		
 		for (int i = 0; i< 3; i++) {
 			m_blueCoatDashboardPage.clickImage("MessageLabel.png");
 			m_blueCoatDashboardPage.clickImage("MessageClose.png");
