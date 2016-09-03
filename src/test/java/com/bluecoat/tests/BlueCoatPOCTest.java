@@ -39,7 +39,7 @@ public class BlueCoatPOCTest extends BaseTest {
 
 		m_bluecoatLoginPage = new BlueCoatLoginPage(driver);
 		m_bluecoatLoginPage.login();
-		Assert.assertTrue(m_bluecoatLoginPage.getTitle().contains("Blue Coat ThreatPulse"), "Title Not found");
+		Assert.assertTrue(m_bluecoatLoginPage.getTitle().contains("XXXXX"), "Title Not found");
 
 	}
 

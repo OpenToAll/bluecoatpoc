@@ -292,7 +292,7 @@ public class ReportListener implements IReporter {
         m_writer.println("<th>Test Method</th>");
         m_writer.println("<th>Start</th>");
         m_writer.println("<th>Time<br>elapsed</th>");
-        m_writer.println("<th>Detail</th></tr>");
+        m_writer.println("<th>Details</th></tr>");
 
         int testIndex = 0;
         int scenarioIndex = 0;
@@ -349,7 +349,8 @@ public class ReportListener implements IReporter {
             int startingScenarioIndex, String dirPathToLogs) {
         int scenarioCount = 0;
         if (!classResults.isEmpty()) {
-            m_writer.print("<tr><th colspan=\"6\">");
+            m_writer.print("<tr align=\"center\">" 
+            		+ "<th colspan=\"6\">");
             m_writer.print(description);
             m_writer.print("</th></tr>");
 
@@ -428,13 +429,21 @@ public class ReportListener implements IReporter {
                     		.append("<td rowspan=\"").append(resultsCount).append("\">")
                             .append(formatDuration(duration)).append("</td>") ;
                     
+                    String result = "";
+                    if (firstResult.getThrowable() != null && firstResult.getThrowable().getStackTrace() != null)  {
+                    	StackTraceElement stack = firstResult.getThrowable().getStackTrace()[0];
+                    	result = stack.getClassName() +"." + stack.getMethodName();
+                    }
+                    else
+                    	result = "Details";
+                    	
                     if( null == testMthdDetail) 
                     	m_buffer.append("<td><a>NOT AVAILABLE</a></td></tr>");
 					else
 						m_buffer.append("<td><a id=\"loginLink\" onclick=toggleTable(\""
 						+ detailTableID 
 						+ "\") href=\"#" + firstResult.getMethod().getMethodName()
-						+ "\">+</a>" 
+						+ "\">" + result  + "</a>" 
 						+ "<table id=\"" + detailTableID
 						+ "\"align=\"center\" style=\"display:none\">"
 						+ "<tr align=\"center\">" 
