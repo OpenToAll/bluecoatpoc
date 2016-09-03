@@ -1,0 +1,25 @@
+17:23:58  INFO   com.bluecoat.reporter.TestListener:onTestStart 22 
+
+****************** START OF TEST CASE  verify_BlueCoat_Message_Close_Sikuli ****************** 
+
+17:23:58  INFO   com.bluecoat.library.Library:log 198 Click  image MessageLabel.png
+17:24:00  INFO   com.bluecoat.library.Library:log 198 Wait: Sleeping for [10] seconds
+17:24:10  INFO   com.bluecoat.library.Library:log 198 Click  image MessageClose.png
+17:24:12  INFO   com.bluecoat.library.Library:log 198 Wait: Sleeping for [10] seconds
+17:24:22  INFO   com.bluecoat.library.Library:log 198 Wait: Sleeping for [10] seconds
+17:24:32  INFO   com.bluecoat.library.Library:log 198 Click  image MessageLabel.png
+17:24:34  INFO   com.bluecoat.library.Library:log 198 Wait: Sleeping for [10] seconds
+17:24:44  INFO   com.bluecoat.library.Library:log 198 Click  image MessageClose.png
+17:24:45  INFO   com.bluecoat.library.Library:log 198 Wait: Sleeping for [10] seconds
+17:24:55  INFO   com.bluecoat.library.Library:log 198 Wait: Sleeping for [10] seconds
+17:25:05  INFO   com.bluecoat.library.Library:log 198 Click  image MessageLabel.png
+17:25:06  INFO   com.bluecoat.library.Library:log 198 Wait: Sleeping for [10] seconds
+17:25:16  INFO   com.bluecoat.library.Library:log 198 Click  image MessageClose.png
+17:25:18  INFO   com.bluecoat.library.Library:log 198 Wait: Sleeping for [10] seconds
+17:25:28  INFO   com.bluecoat.library.Library:log 198 Wait: Sleeping for [10] seconds
+17:25:38  DEBUG  com.bluecoat.library.SeleniumLibrary:dumpHTMLSource 911 Dumping the HTML source to file /Users/suresh/Documents/bluecoatpoc/test-output/Smoke Test/verify_BlueCoat_Message_Close_Sikuli.html
+17:25:38  INFO   com.bluecoat.tests.BaseTest:tearDown 91  
+
+**********************  END OF TEST CASE verify_BlueCoat_Message_Close_Sikuli  ********************** 
+
+

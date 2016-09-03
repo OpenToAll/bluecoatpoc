@@ -90,6 +90,7 @@ public class Library {
 		} else {
 			Log.error("Could not find a suitable browser");
 		}
+		Log.info("Sikuli Image Base Path " + SIKULI_IMAGE);
 		ImagePath.add(SIKULI_IMAGE);
 	}
 

@@ -297,6 +297,23 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		 return false;
 	}
 	
+	
+	/**
+	 * @param imageName
+	 * @return
+	 * @throws Exception 
+	 */
+	public boolean clickImage(String imageName) throws Exception{
+		 log("Click  image " + imageName);
+		 try {
+			 sikuli.mouseOverAndClick(SIKULI_IMAGE+ imageName, SIKULI_IMAGE+ imageName, 40, 10) ;
+			 wait(10);
+			 return true;
+		 } catch (Exception e) {
+			 return true;
+		 }
+	}
+	
 	/**
 	 * @return
 	 * @throws Exception

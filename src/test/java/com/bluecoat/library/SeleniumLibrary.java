@@ -30,6 +30,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.bluecoat.reporter.Log;
+import com.bluecoat.utils.SikuliLibrary;
 
 public class SeleniumLibrary extends Library {
 	static final Logger log = Logger.getLogger(SeleniumLibrary.class);
@@ -40,7 +41,7 @@ public class SeleniumLibrary extends Library {
 	public static enum commandEnum{click, isDisplayed, isElementPresent, isNotDisplayed, getText, sendKeys, submit, compareText, getAttr, moveToElementAndClick,select};
 	public static enum IframeEnum{defaultContent, other}
 	public String returnString = null;
-	
+	public SikuliLibrary sikuli = new SikuliLibrary();
 	
 	public void goToURL(String url){
 		logWithScreenshot("Go to url [ "+url+ " ]");
