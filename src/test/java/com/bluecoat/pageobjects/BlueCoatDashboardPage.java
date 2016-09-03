@@ -245,12 +245,10 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 			try {
 				String element = getValue("bluecoatriskgroupchartgraph").replaceAll("INDEX", i +"");
 				log("Element " + element);
-				
-				ScrollToElement(element);
 				onMouseOver(By.xpath(element));
-				
-				click(By.xpath(element), 1);
-				wait(1);
+				WebElement graphElement = driver.findElement(By.xpath(element));
+				graphElement.click();
+				wait(2);
 				String tooltipvalue = getToolTipValue();
 				onMouseOver(By.xpath(getValue("bluecoatriskgrouptable")));
 				
