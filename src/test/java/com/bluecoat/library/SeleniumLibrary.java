@@ -46,6 +46,7 @@ public class SeleniumLibrary extends Library {
 	public void goToURL(String url){
 		logWithScreenshot("Go to url [ "+url+ " ]");
 		driver.get(url);
+		Global.executionDetailsMap.put("URL", url);
 	}
 	
 	public void click(By locator, int timeout) {
