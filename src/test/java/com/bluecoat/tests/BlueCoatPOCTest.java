@@ -319,4 +319,24 @@ public class BlueCoatPOCTest extends BaseTest {
 		}
 
 	}
+	
+
+	/**
+	 * This method is used to open Message and close Message box using Sikuli
+	 * 
+	 * @throws Exception
+	 */
+	@Test(priority = 9)
+	@TestDetail(testCaseID = "BC_10", testCaseName = "Report Message Box", author = "abc@bluecoat.com")
+	public void verify_BlueCoat_Message_Open_And_Close_Sikuli() throws Exception {
+
+		log("*****Click On Message And Close*****");
+
+		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
+		for (int i = 0; i< 2; i++) {
+			m_blueCoatDashboardPage.clickImage("MessageLabel.png");
+			m_blueCoatDashboardPage.clickImage("MessageClose.png");
+			wait(10);
+		}
+	}
 }
