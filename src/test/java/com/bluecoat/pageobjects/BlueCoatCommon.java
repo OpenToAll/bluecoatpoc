@@ -144,17 +144,5 @@ public class BlueCoatCommon extends SeleniumLibrary {
 		return pdfText;
 	}
 		
-		/**
-		 * @throws Exception
-		 */
-		public void clickCSVPopUpDownload() throws Exception {
-			log("Click Download Button");
-			click(By.xpath(getValue("bluecoatDownload")), timeout);
-			wait(2);
-			click(By.cssSelector(getValue("bluecoatAllCSVRedioButton")), timeout);
-			wait(2);
-			log("Click Popup Download Button");
-			click(By.cssSelector(getValue("bluecoatPopUpDownload")), timeout);
-			wait(10);
-		}
+	
 }
