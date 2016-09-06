@@ -39,7 +39,7 @@ public class BlueCoatPOCTest extends BaseTest {
 
 		m_bluecoatLoginPage = new BlueCoatLoginPage(driver);
 		m_bluecoatLoginPage.login();
-		Assert.assertTrue(m_bluecoatLoginPage.getTitle().contains("XXXXX"), "Title Not found");
+		Assert.assertTrue(m_bluecoatLoginPage.getTitle().contains("Blue Coat ThreatPulse"), "Title Not found");
 
 	}
 
@@ -374,7 +374,7 @@ public class BlueCoatPOCTest extends BaseTest {
 		
 		log("*****Validate Month Is Present*****");
 		for (String month : listOfMonth) {
-			Assert.assertTrue(result.contains(month), "CSV File Not contains Data " + month);
+			Assert.assertTrue(result.contains(month.replaceAll(",", "")), "CSV File Not contains Data " + month);
 		}
 
 	}
