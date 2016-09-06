@@ -197,6 +197,11 @@
 			<artifactId>itextpdf</artifactId>
 			<version>5.0.6</version>
 		</dependency>
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>3.8</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>
