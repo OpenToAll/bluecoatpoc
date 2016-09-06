@@ -1,5 +1,8 @@
 package com.bluecoat.pageobjects;
 
+import java.io.FileReader;
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -10,6 +13,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfReaderContentParser;
 import com.itextpdf.text.pdf.parser.SimpleTextExtractionStrategy;
 import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
+import com.opencsv.CSVReader;
 
 public class BlueCoatCommon extends SeleniumLibrary {
 	
@@ -117,4 +121,40 @@ public class BlueCoatCommon extends SeleniumLibrary {
 	    log("File " + downloadedFile + " Contains \n" + pdfText);
 		return pdfText;
 	}
+	
+	/**
+	 * @return
+	 * @throws Exception
+	 */
+		public String getTextFromCSV() throws Exception {
+		
+		String csvFile = getTheNewestFile(Global.DOWNLOAD_DIR, "CSV").toString();
+		CSVReader reader = null;
+		String pdfText = "";
+	    try {
+	        reader = new CSVReader(new FileReader(csvFile));
+	        String[] line;
+	        while ((line = reader.readNext()) != null) {
+	            System.out.println("[ Month = " + line[0] + ", Requests= " + line[1] + "]");
+	            pdfText+=line[0]+ " "+ line[1] ;
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+		return pdfText;
+	}
+		
+		/**
+		 * @throws Exception
+		 */
+		public void clickCSVPopUpDownload() throws Exception {
+			log("Click Download Button");
+			click(By.xpath(getValue("bluecoatDownload")), timeout);
+			wait(2);
+			click(By.cssSelector(getValue("bluecoatAllCSVRedioButton")), timeout);
+			wait(2);
+			log("Click Popup Download Button");
+			click(By.cssSelector(getValue("bluecoatPopUpDownload")), timeout);
+			wait(10);
+		}
 }

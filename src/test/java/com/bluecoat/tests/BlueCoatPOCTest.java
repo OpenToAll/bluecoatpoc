@@ -339,4 +339,43 @@ public class BlueCoatPOCTest extends BaseTest {
 			wait(10);
 		}
 	}
+	
+	/**
+	 * This method is used to Run Sample Report for Month & Verify same data
+	 * with the download PDF
+	 * 
+	 * @throws Exception
+	 */
+	@Test(priority = 10)
+	@TestDetail(testCaseID = "BC_11", testCaseName = "Report Validation Month", author = "abc@bluecoat.com")
+	public void verify_BlueCoat_CVC_Report_Month() throws Exception {
+
+		log("*****Click On Report Center And Verify Grid Displayed*****");
+
+		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
+		m_blueCoatReportPage= new BlueCoatReportPage(driver);
+		m_blueCoatDashboardPage.goToDashboard();
+		m_blueCoatDashboardPage.changeDateToAllDates();
+		
+		m_blueCoatReportPage.clickReportCenter("bluecoatClickMonth");
+		
+		Assert.assertEquals(m_blueCoatReportPage.getText("bluecoatReportHeader"), "Month",
+				"Report Month is Not Displayed");
+
+		List<String> listOfMonth = m_blueCoatDashboardPage.getGridValueByMonth();
+		System.out.println("listOfMonth : " + listOfMonth);
+
+		log("*****Download Month Data*****");
+		m_blueCoatReportPage.clickCSVPopUpDownload();
+
+		log("*****Get Downloaded PDF, Data Read And Verify Grid Table Data Is Present In PDF*****");
+		String result = m_blueCoatReportPage.getTextFromCSV();
+		System.out.println("result : " + result);
+		
+		log("*****Validate Month Is Present*****");
+		for (String month : listOfMonth) {
+			Assert.assertTrue(result.contains(month), "CSV File Not contains Data " + month);
+		}
+
+	}
 }
