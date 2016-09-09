@@ -181,7 +181,11 @@ public class ReportListener implements IReporter {
 			Header += "<th>Platform</th>";
 			row += "<td>" + Global.executionDetailsMap.get("Platform") + "</td>";
 			noOfColumns++;
-
+			
+			Header += "<th>Url</th>";
+			row += "<td>" + Global.executionDetailsMap.get("Url") + "</td>";
+			noOfColumns++;
+			
 			m_writer.print("<tr><th class=\"head\" colspan=\"" + noOfColumns + "\">Run Parameters</th></tr>");
 			m_writer.print("<tr>");
 			m_writer.println(Header);

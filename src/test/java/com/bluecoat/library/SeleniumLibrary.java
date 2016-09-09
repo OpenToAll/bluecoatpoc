@@ -936,4 +936,16 @@ public class SeleniumLibrary extends Library {
 		}
 
 	}
+	
+	public boolean isElementPresent(By locator, int timeout){
+		try {
+			e=waitFindElement(locator, timeout);
+			logWithScreenshot("[" + locator.toString() + "] is present");
+			return true;
+		} catch (Exception e) {
+			logWithScreenshot("[" + locator.toString() + "] is not present");
+			return false;
+		}
+	}
+
 }

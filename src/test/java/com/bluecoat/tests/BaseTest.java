@@ -27,9 +27,10 @@ public class BaseTest extends SeleniumLibrary {
 	public static String m_logDir = null;
 	int timeout = 20;
 
-	@Parameters({ "outdir", "logAndReportFilePath", "browser" })
+	@Parameters({ "outdir", "logAndReportFilePath", "browser" ,"url", "username", "password"})
 	@BeforeSuite(alwaysRun = true)
 	public void beforeSuite(@Optional String outdir, @Optional String logAndReportFilePath, @Optional String browser,
+			@Optional String url,@Optional String username,@Optional String password,
 			@Optional ITestContext context) throws Exception {
 
 		if (null != outdir && !outdir.isEmpty() && outdir.charAt(outdir.length() - 1) != '/')
@@ -42,7 +43,12 @@ public class BaseTest extends SeleniumLibrary {
 
 		if (browser.isEmpty())
 			browser = System.getenv("BROWSER");
-
+		
+		Global.executionDetailsMap.put("Url", url);
+		Global.executionDetailsMap.put("Username", username);
+		Global.executionDetailsMap.put("Password", password);
+		
+		
 	}
 
 	@Parameters("browser")

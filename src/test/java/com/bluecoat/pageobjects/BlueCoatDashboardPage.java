@@ -361,4 +361,26 @@ public class BlueCoatDashboardPage extends BlueCoatCommon {
 		log("Successfully Selected Option To All Dates");
 	}
 	
+	public boolean checkWidgetIsPresent(String value) throws Exception {
+		log("check Gird Is Present " + value);
+		wait(2);
+		boolean status =isElementPresent(By.xpath(getValue("bluecoatGridTitle").replaceAll("TITLE",value)), timeout);
+		return status;
+	}
+	
+	public void clickSetting(String value,String option) throws Exception {
+		log("Selecting Option " + option + " From Risk Seting");
+		click(By.xpath(getValue("bluecoatSetting").replaceAll("TITLE",option)), timeout);
+		wait(2);
+		log("Select From Option");
+		click(By.xpath(getValue("bluecoatinput")), timeout);
+		wait(2);
+		click(By.xpath(getValue("selecttype").replace("TITLE", value)), timeout);
+		wait(2);
+		click(By.xpath(getValue("bluecoatsettingsave")), timeout);
+		wait(5);
+		log("Successfully Selected Option From Risk Setting");
+	}
+
+	
 }

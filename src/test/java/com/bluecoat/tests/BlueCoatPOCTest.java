@@ -31,7 +31,7 @@ public class BlueCoatPOCTest extends BaseTest {
 	 * 
 	 * @throws Exception
 	 */
-	@Test(priority = 0)
+	@Test(priority = 1)
 	@TestDetail(testCaseID = "BC_1", testCaseName = "Verify Login To Blue Coat", author = "abc@bluecoat.com")
 	public void verify_BlueCoat_Login() throws Exception {
 
@@ -39,7 +39,7 @@ public class BlueCoatPOCTest extends BaseTest {
 
 		m_bluecoatLoginPage = new BlueCoatLoginPage(driver);
 		m_bluecoatLoginPage.login();
-		Assert.assertTrue(m_bluecoatLoginPage.getTitle().contains("Blue Coat ThreatPulse"), "Title Not found");
+		Assert.assertTrue(m_bluecoatLoginPage.getTitle().contains("XXXX XXXX"), "Title Not found");
 
 	}
 
@@ -49,15 +49,21 @@ public class BlueCoatPOCTest extends BaseTest {
 	 * 
 	 * @throws Exception
 	 */
-	@Test(priority = 1)
-	@TestDetail(testCaseID = "BC_2", testCaseName = "DashBoard Website Report Validation", author = "abc@bluecoat.com")
-	public void verify_BlueCoat_DashBoard_WebSite_Full_Report() throws Exception {
+	@Test(priority = 2)
+	@TestDetail(testCaseID = "BC_2", testCaseName = "DashBoard Web Browsring Per site Full Report Validation", author = "abc@bluecoat.com")
+	public void verify_BlueCoat_DashBoard_WebBrowsingPerSite_Full_Report() throws Exception {
 
 		log("*****Get Grid Value Of Web Browser Site And Verify Same In Full Report*****");
 
 		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
+		m_blueCoatReportPage = new BlueCoatReportPage(driver);
 		m_blueCoatDashboardPage.goToDashboard();
 		m_blueCoatDashboardPage.changeDateToAllDates();
+		
+		String webBrowsingWidget = "Web Browsing per Site";
+		boolean exists = m_blueCoatDashboardPage.checkWidgetIsPresent(webBrowsingWidget);
+		if (!exists)
+			m_blueCoatReportPage.addGrid(exists, "User Behavior", webBrowsingWidget);
 		
 		m_blueCoatDashboardPage.ScrollToElement("bluecoatwebbrowsingfullreportlink");
 		m_blueCoatDashboardPage.getGridValueOfWebBrowserSite();
@@ -65,33 +71,9 @@ public class BlueCoatPOCTest extends BaseTest {
 		m_blueCoatDashboardPage.clickFullReportWebBrowserSitePoints();
 		Assert.assertTrue(m_blueCoatDashboardPage.verifyGridAndGraphOfWebBrowserSite(),
 				"Web Browse Site Grid And Graph Value Is Not Same");
-
-	}
-
-	/**
-	 * This method is used to validate each grid title with expected titles
-	 *
-	 * @throws Exception
-	 */
-	@Test(priority = 2)
-	@TestDetail(testCaseID = "BC_3", testCaseName = "DashBoard Grid Validation", author = "abc@bluecoat.com")
-	public void verify_BlueCoat_DashBoard_Widget_Validate() throws Exception {
-
-		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
-		m_blueCoatDashboardPage.goToDashboard();
-		m_blueCoatDashboardPage.changeDateToAllDates();
 		
-		List<String> listOfWidgetTitle = m_blueCoatDashboardPage.getAllWidgetTitles();
-		Assert.assertTrue(m_blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Trend of Threats"),
-				"Title Not found");
-		Assert.assertTrue(m_blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Social Media Applications"),
-				"Title Not found");
-		Assert.assertTrue(m_blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Risk Groups"), "Title Not found");
-		Assert.assertTrue(m_blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Web Browsing per Site"),
-				"Title Not found");
-		Assert.assertTrue(m_blueCoatDashboardPage.titleIsPresent(listOfWidgetTitle, "Web Browsing per User"),
-				"Title Not found");
 	}
+
 
 	/**
 	 * 
@@ -100,13 +82,19 @@ public class BlueCoatPOCTest extends BaseTest {
 	 * @throws Exception
 	 */
 	@Test(priority = 3)
-	@TestDetail(testCaseID = "BC_4", testCaseName = "DashBoard Widget Validation", author = "abc@bluecoat.com")
-	public void verify_BlueCoat_DashBoard_Widget_Enable() throws Exception {
+	@TestDetail(testCaseID = "BC_3", testCaseName = "Dashboard Risk Group Portlet Options validation", author = "abc@bluecoat.com")
+	public void verify_BlueCoat_RiskGroup_Portlet_Options() throws Exception {
 
 		log("*****Enable Grid Only, Verify Grid Is Displayed, And Graph Is Not Displayed*****");
 		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
+		m_blueCoatReportPage = new BlueCoatReportPage(driver);
 		m_blueCoatDashboardPage.goToDashboard();
 		m_blueCoatDashboardPage.changeDateToAllDates();
+		
+		String riskGroupWidget = "Risk Groups";
+		boolean exists = m_blueCoatDashboardPage.checkWidgetIsPresent(riskGroupWidget);
+		if (!exists)
+			m_blueCoatReportPage.addGrid(exists,"Security",riskGroupWidget);
 		
 		m_blueCoatDashboardPage.clickRiskSetting("Grid Only");
 		Assert.assertTrue(m_blueCoatDashboardPage.isDisplay("bluecoatriskgrouptable"),
@@ -136,8 +124,8 @@ public class BlueCoatPOCTest extends BaseTest {
 	 * @throws Exception
 	 */
 	@Test(priority = 4)
-	@TestDetail(testCaseID = "BC_5", testCaseName = "DashBoard Risk Value Graph Validation", author = "abc@bluecoat.com")
-	public void verify_BlueCoat_DashBoard_Risk_Graph_Value() throws Exception {
+	@TestDetail(testCaseID = "BC_4", testCaseName = "DashBoard Risk Group Graph with Grid validation", author = "abc@bluecoat.com")
+	public void verify_BlueCoat_DashBoard_Risk_Group_GridValues() throws Exception {
 
 		log("*****Validate Security In Grid And Graph Tooltip Value Same*****");
 		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
@@ -160,8 +148,8 @@ public class BlueCoatPOCTest extends BaseTest {
 	 * @throws Exception
 	 */
 	@Test(priority = 5)
-	@TestDetail(testCaseID = "BC_6", testCaseName = "DashBoard Overview Day Counts Validation", author = "abc@bluecoat.com")
-	public void verify_BlueCoat_DashBoard_OverviewDayCounts() throws Exception {
+	@TestDetail(testCaseID = "BC_5", testCaseName = "DashBoard Overview of Risk Group Day Graph Validation", author = "abc@bluecoat.com")
+	public void verify_BlueCoat_DashBoard_RiskGroup_OverviewDayGraphCounts() throws Exception {
 
 		log("*****Dashboard Overview Count*****");
 		
@@ -187,8 +175,8 @@ public class BlueCoatPOCTest extends BaseTest {
 	 * @throws Exception
 	 */
 	@Test(priority = 6)
-	@TestDetail(testCaseID = "BC_7", testCaseName = "DashBoard Overview Counts Validation", author = "abc@bluecoat.com")
-	public void verify_BlueCoat_DashBoard_Overview_Count() throws Exception {
+	@TestDetail(testCaseID = "BC_6", testCaseName = "DashBoard Overview of Risk Group Widgets Validation", author = "abc@bluecoat.com")
+	public void verify_BlueCoat_DashBoard_RiskGroup_Overview_Widgets() throws Exception {
 
 		log("*****Dashboard Overview Count*****");
 		
@@ -254,45 +242,13 @@ public class BlueCoatPOCTest extends BaseTest {
 	}
 
 	/**
-	 * This method is used to Run Sample Report for year & Verify same data with
-	 * download PDF
-	 * 
-	 * @throws Exception
-	 */
-	@Test(priority = 7)
-	@TestDetail(testCaseID = "BC_8", testCaseName = "Report Validation Year", author = "abc@bluecoat.com")
-	public void verify_BlueCoat_Report_Year() throws Exception {
-		
-		log("*****Click On Report Center And Verify Grid Displayed*****");
-
-		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
-		m_blueCoatDashboardPage.goToDashboard();
-		m_blueCoatDashboardPage.changeDateToAllDates();
-		
-		m_blueCoatReportPage = new BlueCoatReportPage(driver);
-		m_blueCoatReportPage.clickReportCenter("bluecoatClickYear");
-		Assert.assertEquals(m_blueCoatReportPage.getText("bluecoatReportHeader"), "Year",
-				"Report Year is Not Displayed");
-
-		log("*****Get Value of Grid From The Table*****");
-		String getGridValue = m_blueCoatReportPage.getText("reportpagevalue");
-
-		log("*****Download Year Data*****");
-		m_blueCoatReportPage.clickPopUpDownload();
-
-		log("*****Get Downloaded PDF, Data Read And Verify Grid Table Data Is Present In PDF*****");
-		String result = m_blueCoatReportPage.getTextFromPDF();
-		Assert.assertTrue(result.contains(getGridValue), "PDF File Not contains Data " + getGridValue);
-	}
-
-	/**
 	 * This method is used to Run Sample Report for Month & Verify same data
 	 * with the download PDF
 	 * 
 	 * @throws Exception
 	 */
-	@Test(priority = 8)
-	@TestDetail(testCaseID = "BC_9", testCaseName = "Report Validation Month", author = "abc@bluecoat.com")
+	@Test(priority = 7)
+	@TestDetail(testCaseID = "BC_7", testCaseName = "Report Validation Month", author = "abc@bluecoat.com")
 	public void verify_BlueCoat_Report_Month() throws Exception {
 
 		log("*****Click On Report Center And Verify Grid Displayed*****");
@@ -326,8 +282,8 @@ public class BlueCoatPOCTest extends BaseTest {
 	 * 
 	 * @throws Exception
 	 */
-	@Test(priority = 9)
-	@TestDetail(testCaseID = "BC_10", testCaseName = "Report Message Box", author = "abc@bluecoat.com")
+	@Test(priority = 8)
+	@TestDetail(testCaseID = "BC_8", testCaseName = "Report Message Box", author = "abc@bluecoat.com")
 	public void verify_BlueCoat_Message_Open_And_Close_Sikuli() throws Exception {
 
 		log("*****Click On Message And Close*****");
@@ -346,9 +302,9 @@ public class BlueCoatPOCTest extends BaseTest {
 	 * 
 	 * @throws Exception
 	 */
-	@Test(priority = 10)
-	@TestDetail(testCaseID = "BC_11", testCaseName = "Report Validation Month", author = "abc@bluecoat.com")
-	public void verify_BlueCoat_CVC_Report_Month() throws Exception {
+	@Test(priority = 9)
+	@TestDetail(testCaseID = "BC_9", testCaseName = "CSV Report Validation Month", author = "abc@bluecoat.com")
+	public void verify_BlueCoat_CSV_Report_Month() throws Exception {
 
 		log("*****Click On Report Center And Verify Grid Displayed*****");
 
@@ -363,14 +319,14 @@ public class BlueCoatPOCTest extends BaseTest {
 				"Report Month is Not Displayed");
 
 		List<String> listOfMonth = m_blueCoatDashboardPage.getGridValueByMonth();
-		System.out.println("listOfMonth : " + listOfMonth);
+		log("listOfMonth : " + listOfMonth);
 
 		log("*****Download Month Data*****");
 		m_blueCoatReportPage.clickCSVPopUpDownload();
 
 		log("*****Get Downloaded PDF, Data Read And Verify Grid Table Data Is Present In PDF*****");
 		String result = m_blueCoatReportPage.getTextFromCSV();
-		System.out.println("result : " + result);
+		log("result : " + result);
 		
 		log("*****Validate Month Is Present*****");
 		for (String month : listOfMonth) {
@@ -378,4 +334,40 @@ public class BlueCoatPOCTest extends BaseTest {
 		}
 
 	}
+	
+	
+	/**
+	 * This method is used to Run Sample Report for Month & Verify same data
+	 * with the download PDF
+	 * 
+	 * @throws Exception
+	 */
+	@Test(priority = 10)
+	@TestDetail(testCaseID = "BC_10", testCaseName = "XML Report Validation Month", author = "abc@bluecoat.com")
+	public void verify_BlueCoat_XML_Report_Month() throws Exception {
+
+		log("*****Click On Report Center And Verify Grid Displayed*****");
+
+		m_blueCoatDashboardPage = new BlueCoatDashboardPage(driver);
+		m_blueCoatReportPage= new BlueCoatReportPage(driver);
+		m_blueCoatDashboardPage.goToDashboard();
+		m_blueCoatDashboardPage.changeDateToAllDates();
+		
+		m_blueCoatReportPage.clickReportCenter("bluecoatClickMonth");
+		
+		Assert.assertEquals(m_blueCoatReportPage.getText("bluecoatReportHeader"), "Month",
+				"Report Month is Not Displayed");
+
+		List<String> listOfMonth = m_blueCoatDashboardPage.getGridValueByMonth();
+		log("listOfMonth : " + listOfMonth);
+
+		log("*****Download Month Data*****");
+		m_blueCoatReportPage.clickXMLPopUpDownload();
+
+		log("*****Get Downloaded XML file and verify if the xml contain data");
+		m_blueCoatReportPage.validateXML();
+		log("XML validated successfully");
+	}
+	
+
 }

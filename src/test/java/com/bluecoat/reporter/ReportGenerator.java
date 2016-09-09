@@ -198,7 +198,7 @@ public class ReportGenerator {
 		sb.append("<td ><font  size=2>APPICATION URL </font>	</td><td align='center' size=2> <a href=" + appUrl
 				+ "> " + appUrl + "</a></td></tr>");
 		sb.append("<td><font  size=2>BUILD NUMBER </td><td width=20 align='center' size=2>  "
-				+ JenkinsConnector.getBuildNo() + " </td> </font></tr>");
+				+ "Jenkins Build No." + " </td> </font></tr>");
 		sb.append("<td><font  size=2>BROWSER TESTED </td><td width=20 align='center' size=2>  "
 				+ Global.executionDetailsMap.get("Browser").toUpperCase() + "</td> </font></tr>");
 		sb.append("<td><font  size=2>PLATFORM </td><td width=20 align='center' size=2>  "
@@ -208,7 +208,7 @@ public class ReportGenerator {
 		sb.append("<td><font  size=2>APP VERSION  </td><td width=20 align='center' size=2>  " + "xxx"
 				+ " </td> </font></tr>");
 
-		String reportLink = JenkinsConnector.getBuildUrl() + "/testReport/";
+		String reportLink = "Jenkins Link" + "/testReport/";
 		sb.append("<td><font  size=2>REPORT LINK </td><td width=20 align='center' size=2>  " + reportLink
 				+ " </td> </font></tr>");
 

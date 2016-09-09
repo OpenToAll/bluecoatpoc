@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import com.bluecoat.library.Global;
 import com.bluecoat.library.SeleniumLibrary;
+import com.bluecoat.utils.ReadXML;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfReaderContentParser;
 import com.itextpdf.text.pdf.parser.SimpleTextExtractionStrategy;
@@ -142,6 +143,17 @@ public class BlueCoatCommon extends SeleniumLibrary {
 	        e.printStackTrace();
 	    }
 		return pdfText;
+	}
+		
+		/**
+		 * @return
+		 * @throws Exception
+		 */
+	public void validateXML() throws Exception {
+
+		String xmlFile = getTheNewestFile(Global.DOWNLOAD_DIR, "XML").toString();
+		ReadXML.parseXML(xmlFile);
+
 	}
 		
 	
